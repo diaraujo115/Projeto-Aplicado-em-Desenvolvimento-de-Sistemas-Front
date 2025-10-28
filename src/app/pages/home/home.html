@@ -1,0 +1,24 @@
+<div class="home-container">
+  <header>
+    <h1>Bem-vindo ao Receitas de Despensa!</h1>
+    <button (click)="onLogout()">Sair (Logout)</button>
+  </header>
+
+  <main>
+    <h2>Minhas Receitas</h2>
+
+    <div class_alias="receita-list">
+
+      <div *ngIf="receitas.length === 0">
+        <p>Carregando receitas...</p>
+      </div>
+
+      <div *ngFor="let receita of receitas" class="receita-card">
+        <h3>{{ receita.titulo }}</h3>
+        <p>{{ receita.descricao }}</p>
+        <button>Ver Detalhes</button>
+      </div>
+
+    </div>
+    </main>
+</div>
