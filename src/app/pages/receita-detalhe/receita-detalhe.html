@@ -1,0 +1,35 @@
+<div class="detalhe-container">
+  <a routerLink="/home" class="btn-voltar">← Voltar para a lista</a>
+
+  <div *ngIf="!receita; else showReceita">
+    <p>Carregando detalhes da receita...</p>
+  </div>
+
+  <ng-template #showReceita>
+    <header>
+      <h1>{{ receita?.titulo }}</h1>
+      <p>Por: {{ receita?.usuario?.nome }} | Data: {{ receita?.dataCriacao | date: 'dd/MM/yyyy' }}</p>
+      <div class="rating">
+        Média de Avaliações: {{ receita?.mediaAvaliacoes ? (receita?.mediaAvaliacoes | number: '1.1-1') : 'N/A' }} ★
+      </div>
+    </header>
+
+    <section class="descricao">
+      <p>{{ receita?.descricao }}</p>
+    </section>
+
+    <section class="ingredientes">
+      <h3>Ingredientes</h3>
+      <ul>
+        <li *ngFor="let item of receita?.ingredientes">
+          {{ item.quantidade }} {{ item.unidade }} de {{ item.nomeIngrediente }}
+        </li>
+      </ul>
+    </section>
+
+    <section class="modo-preparo">
+      <h3>Modo de Preparo</h3>
+      <div [innerHTML]="receita?.modoPreparo?.replace('\n', '<br>')"></div>
+    </section>
+  </ng-template>
+</div>

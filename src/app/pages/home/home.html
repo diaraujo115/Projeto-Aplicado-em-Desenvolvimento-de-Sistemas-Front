@@ -16,7 +16,7 @@
       <div *ngFor="let receita of receitas" class="receita-card">
         <h3>{{ receita.titulo }}</h3>
         <p>{{ receita.descricao }}</p>
-        <button>Ver Detalhes</button>
+        <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
       </div>
 
     </div>

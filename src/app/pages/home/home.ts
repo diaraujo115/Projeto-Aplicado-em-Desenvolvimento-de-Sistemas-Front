@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReceitaService } from '../../services/receita'; 
 import { Receita } from '../../interfaces/receita';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
