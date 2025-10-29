@@ -12,7 +12,30 @@
       <div class="rating">
         Média de Avaliações: {{ receita?.mediaAvaliacoes ? (receita?.mediaAvaliacoes | number: '1.1-1') : 'N/A' }} ★
       </div>
+      <button 
+        class="btn-salvar" 
+        (click)="toggleSalvarReceita()"
+        [class.salva]="receitaEstaSalva">
+        {{ receitaEstaSalva ? 'Remover dos Favoritos' : 'Salvar nos Favoritos' }}
+        </button>
     </header>
+
+    <section class="classificacao">
+      <h3>Avalie esta receita:</h3>
+      <div class="estrelas">
+        <span *ngFor="let i of [1, 2, 3, 4, 5]" 
+              class="estrela"
+              (mouseover)="setHoverNota(i)"
+              (mouseleave)="setHoverNota(0)"
+              (click)="setNota(i)"
+              [class.cheia]="i <= (hoverNota || notaSelecionada)">
+          ★
+        </span>
+      </div>
+      <button (click)="classificar()" [disabled]="notaSelecionada === 0">
+        Avaliar com {{ notaSelecionada }} estrela(s)
+      </button>
+    </section>
 
     <section class="descricao">
       <p>{{ receita?.descricao }}</p>
@@ -31,5 +54,30 @@
       <h3>Modo de Preparo</h3>
       <div [innerHTML]="receita?.modoPreparo?.replace('\n', '<br>')"></div>
     </section>
+
+    <section class="comentarios">
+  <h3>Comentários</h3>
+
+  <div class="novo-comentario">
+    <textarea 
+      [(ngModel)]="novoComentarioTexto" 
+      placeholder="Escreva seu comentário aqui..."
+      rows="3"></textarea>
+    <button (click)="adicionarComentario()" [disabled]="!novoComentarioTexto.trim()">
+      Comentar
+    </button>
+  </div>
+
+  <div class="lista-comentarios">
+    <div *ngIf="comentarios.length === 0">
+      <p>Seja o primeiro a comentar!</p>
+    </div>
+
+    <div *ngFor="let comentario of comentarios" class="comentario-card">
+      <p><strong>{{ comentario.usuario.nome }}</strong> <span> em {{ comentario.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</span></p>
+      <p>{{ comentario.texto }}</p>
+    </div>
+  </div>
+</section>
   </ng-template>
 </div>

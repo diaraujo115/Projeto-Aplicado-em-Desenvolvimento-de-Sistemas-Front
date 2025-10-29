@@ -31,3 +31,13 @@ export interface ReceitaDetalhe {
   ingredientes: IngredienteDTO[];
   mediaAvaliacoes: number | null;
 }
+
+export interface Comentario {
+  id: number;
+  texto: string;
+  dataCriacao: string;
+  usuario: { 
+    id: number;
+    nome: string;
+  };
+}

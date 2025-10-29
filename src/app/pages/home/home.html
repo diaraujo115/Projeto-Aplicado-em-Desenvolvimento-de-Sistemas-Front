@@ -7,6 +7,25 @@
   <main>
     <h2>Minhas Receitas</h2>
 
+    <section class="filtros">
+      <div class="form-group">
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" name="categoria" [(ngModel)]="filtroCategoria">
+          <option value="">Todas</option>
+          <option *ngFor="let cat of categoriasDisponiveis" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="dieta">Dieta:</label>
+        <select id="dieta" name="dieta" [(ngModel)]="filtroDieta">
+          <option value="">Todas</option>
+          <option *ngFor="let diet of dietasDisponiveis" [value]="diet">{{ diet }}</option>
+        </select>
+      </div>
+      <button (click)="aplicarFiltros()">Filtrar</button>
+      <button (click)="limparFiltros()">Limpar Filtros</button>
+    </section>
+
     <div class_alias="receita-list">
 
       <div *ngIf="receitas.length === 0">

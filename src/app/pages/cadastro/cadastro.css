@@ -1,0 +1,20 @@
+/* src/app/pages/cadastro/cadastro.component.css */
+.cadastro-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.cadastro-container h2 {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.cadastro-container button {
+  width: 100%;
+  margin-top: 10px;
+}

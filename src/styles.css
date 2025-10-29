@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+/* Reset básico e fonte padrão */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; /* Ou outra fonte de sua preferência */
+  background-color: #f4f4f4; /* Um fundo cinza claro */
+  color: #333;
+}
+
+/* Container principal para centralizar conteúdo */
+.container {
+  max-width: 960px; /* Largura máxima */
+  margin: 20px auto; /* Centraliza na página com margem no topo/baixo */
+  padding: 20px;
+  background-color: #fff; /* Fundo branco para o conteúdo */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 8px;
+}
+
+/* Estilos básicos para botões */
+button, a.btn-detalhes, a.btn-voltar {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none; /* Para links estilizados como botões */
+  display: inline-block; /* Para links */
+  transition: background-color 0.2s;
+  margin: 5px; /* Adiciona um pequeno espaçamento */
+}
+
+button:hover:not(:disabled), a.btn-detalhes:hover, a.btn-voltar:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilos básicos para formulários */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Garante que padding não aumente a largura total */
+}
+
+h1, h2, h3 {
+    color: #555;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}

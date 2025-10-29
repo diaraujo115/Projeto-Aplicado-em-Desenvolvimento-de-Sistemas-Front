@@ -1,0 +1,152 @@
+/* src/app/pages/receita-detalhe/receita-detalhe.component.css */
+
+.classificacao {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.estrelas {
+  font-size: 2em; /* Tamanho das estrelas */
+  color: #ccc;   /* Cor da estrela vazia */
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.estrela {
+  transition: color 0.2s ease-in-out;
+}
+
+.estrela.cheia {
+  color: #ffc107; /* Cor da estrela cheia (amarelo) */
+}
+
+.classificacao button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.classificacao button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.classificacao button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* src/app/pages/receita-detalhe/receita-detalhe.component.css */
+/* ... (outros estilos) ... */
+
+.btn-salvar {
+  margin-left: 15px; /* Espaçamento */
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-salvar:hover {
+  background-color: #eee;
+}
+
+.btn-salvar.salva { /* Estilo quando a receita está salva */
+  background-color: #ffe082; /* Um amarelo claro, por exemplo */
+  border-color: #ffc107;
+}
+
+/* src/app/pages/receita-detalhe/receita-detalhe.component.css */
+.detalhe-container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-voltar {
+  margin-bottom: 20px;
+}
+
+.detalhe-container header {
+  position: relative; /* Para posicionar o botão salvar */
+  border-bottom: 2px solid #007bff;
+}
+
+.detalhe-container header h1 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.detalhe-container header p {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.rating {
+  font-weight: bold;
+}
+
+.btn-salvar {
+   
+    top: 10px;
+    right: 10px;
+}
+
+.classificacao, .descricao, .ingredientes, .modo-preparo, .comentarios {
+  margin-top: 30px;
+}
+
+.ingredientes ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.ingredientes li {
+  margin-bottom: 8px;
+}
+
+.modo-preparo div {
+    line-height: 1.6; /* Melhora a legibilidade */
+}
+
+.comentarios h3, .classificacao h3, .ingredientes h3, .modo-preparo h3 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.novo-comentario textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.comentario-card {
+  border: 1px solid #f0f0f0;
+  background-color: #f9f9f9;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.comentario-card p {
+  margin: 5px 0;
+}
+
+.comentario-card strong {
+    color: #0056b3;
+}
+
+.comentario-card span {
+  font-size: 0.8em;
+  color: #999;
+  margin-left: 10px;
+}
+
