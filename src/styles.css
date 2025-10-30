@@ -1,56 +1,80 @@
 /* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  --cor-primaria: #FFA500; /* Laranja */
+  --cor-secundaria: #FF6347; /* Tomate (Vermelho-Alaranjado) */
+  --cor-acento: #FFD700; /* Dourado (Amarelo) */
+  --cor-fundo: #f8f9fa; /* Cinza muito claro */
+  --cor-texto: #343a40; /* Cinza escuro */
+  --cor-texto-claro: #6c757d; /* Cinza médio */
+  --cor-branco: #FFFFFF;
+  --cor-borda: #dee2e6; /* Cinza claro para bordas */
+  --cor-logo-fundo: #fefbf4;
+}
 
 /* Reset básico e fonte padrão */
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif; /* Ou outra fonte de sua preferência */
-  background-color: #f4f4f4; /* Um fundo cinza claro */
-  color: #333;
+  font-family: 'Roboto', sans-serif; /* Nova fonte */
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
 }
 
-/* Container principal para centralizar conteúdo */
+/* Container principal */
 .container {
-  max-width: 960px; /* Largura máxima */
-  margin: 20px auto; /* Centraliza na página com margem no topo/baixo */
-  padding: 20px;
-  background-color: #fff; /* Fundo branco para o conteúdo */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  border-radius: 8px;
+  max-width: 1140px;
+  margin: 30px auto;
+  padding: 25px 30px;
+  background-color: var(--cor-branco);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
 }
 
-/* Estilos básicos para botões */
-button, a.btn-detalhes, a.btn-voltar {
-  padding: 10px 15px;
+/* Estilos para botões e links como botões */
+button, a.btn-detalhes, a.btn-voltar, .btn-salvar {
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none; /* Para links estilizados como botões */
-  display: inline-block; /* Para links */
-  transition: background-color 0.2s;
-  margin: 5px; /* Adiciona um pequeno espaçamento */
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button:hover:not(:disabled), a.btn-detalhes:hover, a.btn-voltar:hover {
-  background-color: #0056b3;
+button:hover:not(:disabled), a.btn-detalhes:hover, a.btn-voltar:hover, .btn-salvar:hover {
+  background-color: #e69500; /* Laranja um pouco mais escuro */
+  transform: translateY(-1px); /* Leve efeito ao passar o mouse */
 }
+
+button:active:not(:disabled), a.btn-detalhes:active, a.btn-voltar:active, .btn-salvar:active {
+    transform: translateY(0px); /* Remove o efeito no clique */
+}
+
 
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* Estilos básicos para formulários */
+/* Estilos para formulários */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--cor-texto-claro);
 }
 
 .form-group input[type="text"],
@@ -59,21 +83,46 @@ button:disabled {
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box; /* Garante que padding não aumente a largura total */
+  padding: 12px 15px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
-h1, h2, h3 {
-    color: #555;
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2); /* Sombra suave laranja no foco */
 }
+
+/* Títulos */
+h1, h2, h3 {
+    color: var(--cor-texto);
+    margin-bottom: 0.8em;
+}
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.8em; }
+h3 { font-size: 1.4em; }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    border-bottom: 1px solid var(--cor-borda);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+/* Links padrão */
+a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+}
+a:hover {
+    color: #e69500;
+    text-decoration: underline;
 }

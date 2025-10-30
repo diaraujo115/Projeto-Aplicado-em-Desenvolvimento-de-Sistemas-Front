@@ -1,1 +1,36 @@
-<router-outlet></router-outlet>
+<header class="app-header">
+  <nav class="header-content">
+    <a routerLink="/home" class="logo-link">
+      <img src="assets/images/logo.png" alt="Receitas de Despensa Logo" class="logo-img">
+    </a>
+
+    <div class="right-nav-group">
+      <div class="search-container">
+        <input type="text" placeholder="Procurar receita..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()">
+        <button (click)="onSearch()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="user-actions">
+        <button *ngIf="!isLoggedIn()" routerLink="/login" class="btn-login">
+          Entrar
+        </button>
+        <div *ngIf="isLoggedIn()" class="logged-in-actions">
+          <button routerLink="/perfil" class="btn-account">
+            Minha Conta
+          </button>
+          <button (click)="onLogout()" class="btn-logout">
+            Sair
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

@@ -1,152 +1,129 @@
 /* src/app/pages/receita-detalhe/receita-detalhe.component.css */
-
-.classificacao {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
-
-.estrelas {
-  font-size: 2em; /* Tamanho das estrelas */
-  color: #ccc;   /* Cor da estrela vazia */
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.estrela {
-  transition: color 0.2s ease-in-out;
-}
-
-.estrela.cheia {
-  color: #ffc107; /* Cor da estrela cheia (amarelo) */
-}
-
-.classificacao button {
-  padding: 8px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.classificacao button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.classificacao button:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-/* src/app/pages/receita-detalhe/receita-detalhe.component.css */
-/* ... (outros estilos) ... */
-
-.btn-salvar {
-  margin-left: 15px; /* Espaçamento */
-  padding: 5px 10px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  background-color: #f8f8f8;
-  border-radius: 4px;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-salvar:hover {
-  background-color: #eee;
-}
-
-.btn-salvar.salva { /* Estilo quando a receita está salva */
-  background-color: #ffe082; /* Um amarelo claro, por exemplo */
-  border-color: #ffc107;
-}
-
-/* src/app/pages/receita-detalhe/receita-detalhe.component.css */
 .detalhe-container {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px; /* Mais padding */
+  background-color: var(--cor-branco);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .btn-voltar {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  background-color: var(--cor-texto-claro); /* Cor diferente para voltar */
+}
+.btn-voltar:hover {
+    background-color: #5a6268;
 }
 
 .detalhe-container header {
-  position: relative; /* Para posicionar o botão salvar */
-  border-bottom: 2px solid #007bff;
+  position: relative;
+  border-bottom: 2px solid var(--cor-primaria); /* Borda laranja */
 }
 
 .detalhe-container header h1 {
-    margin-bottom: 5px;
-    color: #333;
+    color: var(--cor-texto);
+    margin-bottom: 8px;
 }
 
 .detalhe-container header p {
-    font-size: 0.9em;
-    color: #777;
-    margin-bottom: 10px;
+    font-size: 1em; /* Um pouco maior */
+    color: var(--cor-texto-claro);
+    margin-bottom: 12px;
 }
 
 .rating {
   font-weight: bold;
+  color: var(--cor-acento); /* Média em amarelo */
 }
 
 .btn-salvar {
-   
-    top: 10px;
-    right: 10px;
+    
+    top: 0px; /* Ajustar posição */
+    right: 0px;
+    background-color: var(--cor-branco);
+    color: var(--cor-secundaria); /* Coração vermelho */
+    border: 1px solid var(--cor-secundaria);
+    font-size: 1.5em; /* Aumentar tamanho (se usar ícone) */
+    padding: 5px 10px; /* Ajustar padding */
+    line-height: 1;
 }
 
+.btn-salvar:hover {
+    background-color: #ffeeee; /* Fundo levemente rosado no hover */
+}
+
+.btn-salvar.salva {
+    background-color: var(--cor-secundaria); /* Fundo vermelho quando salvo */
+    color: var(--cor-branco);
+    border-color: var(--cor-secundaria);
+}
+/* Adapte o texto ou use um ícone (ex: Font Awesome) para o botão salvar */
+/* Ex: <button (click)="toggleSalvarReceita()"> <i [class]="receitaEstaSalva ? 'fas fa-heart' : 'far fa-heart'"></i> </button> */
+
+
+/* Seções */
 .classificacao, .descricao, .ingredientes, .modo-preparo, .comentarios {
-  margin-top: 30px;
+  margin-top: 35px;
 }
 
 .ingredientes ul {
-  list-style: disc;
-  padding-left: 20px;
+  list-style: none; /* Remover bolinhas */
+  padding-left: 0;
 }
 
 .ingredientes li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--cor-borda); /* Linha separadora */
+  padding-bottom: 10px;
 }
 
 .modo-preparo div {
-    line-height: 1.6; /* Melhora a legibilidade */
+    line-height: 1.7;
+    background-color: #fdfdfd; /* Fundo sutil */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--cor-borda);
 }
 
+/* Títulos das seções */
 .comentarios h3, .classificacao h3, .ingredientes h3, .modo-preparo h3 {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 5px;
-  margin-bottom: 15px;
+  border-bottom: 2px solid var(--cor-secundaria); /* Borda vermelha */
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  color: var(--cor-texto);
 }
 
+/* Comentários */
 .novo-comentario textarea {
-  width: 100%;
   margin-bottom: 10px;
+}
+.novo-comentario button {
+    background-color: var(--cor-secundaria); /* Botão comentar vermelho */
+}
+.novo-comentario button:hover:not(:disabled) {
+    background-color: #cc503a;
 }
 
 .comentario-card {
-  border: 1px solid #f0f0f0;
-  background-color: #f9f9f9;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 4px;
+  border-left: 4px solid var(--cor-primaria); /* Borda lateral laranja */
+  background-color: #fff9f2; /* Fundo levemente alaranjado */
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 5px;
 }
 
-.comentario-card p {
-  margin: 5px 0;
-}
+.comentario-card p { margin: 5px 0; }
+.comentario-card strong { color: var(--cor-primaria); }
+.comentario-card span { font-size: 0.85em; color: var(--cor-texto-claro); margin-left: 10px; }
 
-.comentario-card strong {
-    color: #0056b3;
+/* Estrelas */
+.estrelas {
+  font-size: 2.2em;
+  color: #e0e0e0; /* Cinza mais claro para vazia */
+  cursor: pointer;
+  margin-bottom: 15px;
 }
-
-.comentario-card span {
-  font-size: 0.8em;
-  color: #999;
-  margin-left: 10px;
+.estrela { transition: color 0.2s ease-in-out; }
+.estrela.cheia { color: var(--cor-acento); } /* Amarelo */
+.classificacao button { /* Botão avaliar */
+    /* Já estilizado globalmente, pode adicionar ajustes se precisar */
 }
-

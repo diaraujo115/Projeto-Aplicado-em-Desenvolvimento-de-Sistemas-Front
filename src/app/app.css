@@ -1,0 +1,184 @@
+/* src/app/app.component.css */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ocupa no mínimo a altura da tela */
+}
+.app-header {
+  width: 100%; /* Garante que o header ocupe toda a largura */
+  background-color: #fefbf4; /* SUA COR DE FUNDO DESEJADA */
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Sombra mais sutil */
+  border-bottom: 1px solid #eee; /* Borda inferior mais sutil */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+.main-content {
+  flex-grow: 1; /* Faz o conteúdo principal crescer e ocupar o espaço restante */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* (O layout de split-screen ou .container centralizado
+     será aplicado pelos componentes filhos) */
+}
+
+/* Este container interno agora controla a largura e o alinhamento */
+.header-content {
+  display: flex;
+  justify-content: space-between; /* LOGO <---> (BUSCA + AÇÕES) */
+  align-items: center;
+  padding: 0 20px; /* Padding LATERAIS para não colar nas bordas da tela */
+  margin: 0 auto; /* Centraliza o container de conteúdo */
+  max-width: 1140px; /* Largura máxima do CONTEÚDO */
+}
+
+.logo-link {
+  flex-shrink: 0;
+  /* Não precisa de margem direita aqui, o space-between cuida disso */
+}
+
+.logo-img {
+  height: 55px; /* Mantenha ou ajuste */
+  width: auto;
+  display: block;
+}
+
+/* Agrupa busca e ações do usuário para ficarem juntos à direita */
+.header-right-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espaço entre a busca e as ações do usuário */
+}
+
+/* Ajuste no container da página principal */
+.page-container {
+    padding: 25px 0px; /* Mantém padding vertical */
+}
+
+/* src/app/app.component.css */
+
+.app-header {
+  width: 100%;
+  background-color: var(--cor-logo-fundo); /* << COR ATUALIZADA */
+  padding: 10px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  border-bottom: 2px solid var(--cor-primaria);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between; /* LOGO (esquerda) vs GRUPO (direita) */
+  align-items: center;
+  width: 100%;            /* << MUDANÇA: Ocupa 100% da largura */
+  padding: 0 40px;        /* << MUDANÇA: Padding nas laterais da tela */
+  margin: 0 auto;
+  box-sizing: border-box; /* Garante que o padding não estoure a largura */
+  /* max-width: 1140px;  << REMOVIDO */
+}
+
+.logo-link {
+  flex-shrink: 0;
+}
+
+.logo-img {
+  height: 60px; /* Você pode ajustar este tamanho */
+  width: auto;
+  display: block;
+}
+
+/* Novo grupo da direita */
+.right-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Espaço entre a busca e os botões */
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  /* margin: 0 20px; << REMOVIDO */
+}
+
+/* ... (Estilos do input e botão de busca - podem ser mantidos) ... */
+.search-container input[type="text"] {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 5px 0 0 5px;
+  font-size: 0.95rem;
+  border-right: none;
+}
+.search-container input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
+}
+.search-container button {
+  padding: 8px 12px;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--cor-secundaria);
+  color: white;
+  border: 1px solid var(--cor-secundaria);
+  border-left: none;
+  cursor: pointer;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-container button:hover {
+    background-color: #cc503a;
+    border-color: #cc503a;
+}
+.search-container button svg {
+    display: block;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.user-actions .logged-in-actions {
+    display: flex; /* Garante que os botões fiquem lado a lado */
+}
+
+.user-actions .btn-login,
+.user-actions .btn-account,
+.user-actions .btn-logout {
+  padding: 8px 16px;
+  margin-left: 10px;
+  font-size: 0.9em;
+  white-space: nowrap; /* Evita que o texto quebre */
+}
+
+/* ... (Estilos dos botões de usuário - podem ser mantidos) ... */
+.user-actions .btn-login {
+    background-color: var(--cor-secundaria);
+}
+.user-actions .btn-login:hover {
+    background-color: #cc503a;
+}
+.user-actions .btn-account {
+    background-color: var(--cor-primaria);
+}
+.user-actions .btn-account:hover {
+    background-color: #e69500;
+}
+.user-actions .btn-logout {
+    background-color: var(--cor-texto-claro);
+}
+.user-actions .btn-logout:hover {
+    background-color: #5a6268;
+}
+
+/* ... (Estilos de .main-content e .page-container - podem ser mantidos) ... */
