@@ -1,0 +1,68 @@
+<div class="container form-container">
+  <a routerLink="/home" class="btn-voltar">← Voltar para Home</a>
+  <h2>Criar Nova Receita</h2>
+
+  <form (ngSubmit)="onSubmit()" #receitaForm="ngForm">
+
+    <div class="form-section">
+      <h3>Informações Básicas</h3>
+      <div class="form-group">
+        <label for="titulo">Título da Receita:</label>
+        <input type="text" id="titulo" name="titulo" [(ngModel)]="receita.titulo" required>
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição Curta:</label>
+        <input type="text" id="descricao" name="descricao" [(ngModel)]="receita.descricao" required>
+      </div>
+      <div class="form-group-inline">
+        <div class="form-group">
+          <label for="categoria">Categoria:</label>
+          <input type="text" id="categoria" name="categoria" [(ngModel)]="receita.categoria" placeholder="Ex: Sobremesa">
+        </div>
+        <div class="form-group">
+          <label for="dieta">Dieta (opcional):</label>
+          <input type="text" id="dieta" name="dieta" [(ngModel)]="receita.dieta" placeholder="Ex: Vegetariana">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Ingredientes</h3>
+      <div *ngFor="let ingrediente of ingredientesDaReceita; let i = index" class="ingrediente-linha">
+
+        <div class="form-group ingrediente-nome">
+          <label for="ingrediente-{{i}}">Ingrediente:</label>
+          <select id="ingrediente-{{i}}" name="ingrediente-{{i}}" [(ngModel)]="ingrediente.ingredienteId" required>
+            <option [ngValue]="null" disabled>Selecione...</option>
+            <option *ngFor="let ing of listaDeTodosIngredientes" [value]="ing.id">
+              {{ ing.nome }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group ingrediente-qtd">
+          <label for="quantidade-{{i}}">Qtd.:</label>
+          <input type="text" id="quantidade-{{i}}" name="quantidade-{{i}}" [(ngModel)]="ingrediente.quantidade" required>
+        </div>
+
+        <div class="form-group ingrediente-unidade">
+          <label for="unidade-{{i}}">Unidade:</label>
+          <input type="text" id="unidade-{{i}}" name="unidade-{{i}}" [(ngModel)]="ingrediente.unidade" required placeholder="Ex: gramas, xícara">
+        </div>
+
+        <button type="button" (click)="removerLinhaIngrediente(i)" class="btn-remover-linha" title="Remover Ingrediente">X</button>
+      </div>
+
+      <button type="button" (click)="adicionarLinhaIngrediente()" class="btn-adicionar-linha">+ Adicionar Ingrediente</button>
+    </div>
+
+    <div class="form-section">
+      <h3>Modo de Preparo</h3>
+      <div class="form-group">
+        <textarea id="modoPreparo" name="modoPreparo" [(ngModel)]="receita.modoPreparo" rows="10" required placeholder="Passo 1: ..."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-salvar-receita" [disabled]="!receitaForm.form.valid">Salvar Receita</button>
+  </form>
+</div>

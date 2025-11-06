@@ -81,3 +81,13 @@
   margin-top: 15px; /* Margem acima do botão */
   align-self: flex-start; /* Alinha o botão à esquerda */
 }
+
+.header-minhas-receitas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.btn-criar-receita {
+  /* Estilos globais de botão já devem ser aplicados */
+}

@@ -95,4 +95,8 @@ export class ReceitaService {
     // Chama o endpoint GET /api/receitas/search
     return this.http.get<Receita[]>(`${this.apiUrl}/search`, { params: params });
   }
+
+  criarReceita(receitaData: any): Observable<ReceitaDetalhe> {
+    return this.http.post<ReceitaDetalhe>(this.apiUrl, receitaData);
+  }
 }

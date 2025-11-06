@@ -7,6 +7,7 @@ import { ReceitaDetalheComponent } from './pages/receita-detalhe/receita-detalhe
 import { Perfil } from './pages/perfil/perfil';
 import { PerfilEditar } from './pages/perfil-editar/perfil-editar';
 import { SearchResults } from './pages/search-results/search-results';
+import { ReceitaNova } from './pages/receita-nova/receita-nova';
 
 export const routes: Routes = [
 
@@ -29,6 +30,11 @@ export const routes: Routes = [
     path: 'search',
     component: SearchResults
     // Esta rota não precisa de guardião, permitindo que todos busquem
+  },
+  { 
+    path: 'receitas/nova', 
+    component: ReceitaNova, 
+    canActivate: [authGuard] 
   },
     
 { path: '', redirectTo: '/home', pathMatch: 'full' }

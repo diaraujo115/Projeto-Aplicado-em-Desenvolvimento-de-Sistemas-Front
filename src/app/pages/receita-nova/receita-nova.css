@@ -1,0 +1,89 @@
+/* src/app/pages/receita-nova/receita-nova.component.css */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--cor-branco);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.btn-voltar {
+  background-color: var(--cor-texto-claro);
+  margin-bottom: 25px;
+}
+.btn-voltar:hover {
+  background-color: #5a6268;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--cor-texto);
+}
+
+.form-section {
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 20px;
+}
+.form-section h3 {
+  color: var(--cor-primaria);
+  margin-top: 0;
+}
+
+.form-group-inline {
+  display: flex;
+  gap: 20px;
+}
+.form-group-inline .form-group {
+  flex: 1;
+}
+
+/* Layout da Linha de Ingrediente */
+.ingrediente-linha {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end; /* Alinha os campos na base */
+  margin-bottom: 15px;
+}
+
+.ingrediente-nome { flex: 3; } /* Ingrediente ocupa mais espaço */
+.ingrediente-qtd { flex: 1; }
+.ingrediente-unidade { flex: 2; }
+
+.btn-remover-linha {
+  background-color: var(--cor-secundaria);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 22px; /* Alinha com os inputs */
+  flex-shrink: 0;
+}
+.btn-remover-linha:hover {
+  background-color: #c82333;
+}
+
+.btn-adicionar-linha {
+  background-color: #28a745; /* Verde */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-adicionar-linha:hover {
+  background-color: #218838;
+}
+
+.btn-salvar-receita {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
