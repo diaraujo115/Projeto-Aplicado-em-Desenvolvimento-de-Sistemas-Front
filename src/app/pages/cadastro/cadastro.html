@@ -8,15 +8,30 @@
     <div class="form-wrapper"> <h2>Criar Conta</h2> <form (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" [(ngModel)]="dadosCadastro.nome" required>
+          <input type="text" id="nome" name="nome" [(ngModel)]="dadosCadastro.nome" #nome="ngModel" required>
+        <div *ngIf="nome.invalid && (nome.dirty || nome.touched)" class="error-message">
+        <div *ngIf="nome.errors?.['required']">Nome é obrigatório.</div>
+      </div>
+        
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" [(ngModel)]="dadosCadastro.email" required>
-        </div>
+          <input type="email" id="email" name="email" [(ngModel)]="dadosCadastro.email" #email="ngModel" required>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+        <div *ngIf="email.errors?.['required']">Email é obrigatório.</div>
+        <div *ngIf="email.errors?.['email']">Por favor, insira um email válido.</div>
+      </div>
+        
+        </div> 
         <div class="form-group">
           <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha" [(ngModel)]="dadosCadastro.senha" required>
+          <input type="password" id="senha" name="senha" [(ngModel)]="dadosCadastro.senha" #senha="ngModel"
+             required minlength="6" required>
+
+              <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="error-message">
+                <div *ngIf="senha.errors?.['required']">Senha é obrigatória.</div>
+                <div *ngIf="senha.errors?.['minlength']">A senha deve ter no mínimo 6 caracteres.</div>
+              </div>
         </div>
         <button type="submit">Cadastrar</button>
       </form>

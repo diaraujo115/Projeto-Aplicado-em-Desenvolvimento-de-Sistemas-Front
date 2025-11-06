@@ -1,0 +1,19 @@
+<div class="container search-results-container">
+  <h2>Resultados da busca por: "{{ termoBusca }}"</h2>
+
+  <div *ngIf="estaCarregando">
+    <p>Buscando...</p>
+  </div>
+
+  <div *ngIf="!estaCarregando && resultados.length === 0">
+    <p>Nenhuma receita encontrada com o termo "{{ termoBusca }}".</p>
+  </div>
+
+  <div *ngIf="!estaCarregando && resultados.length > 0" class="card-list">
+    <div *ngFor="let receita of resultados" class="receita-card">
+      <h3>{{ receita.titulo }}</h3>
+      <p>{{ receita.descricao }}</p>
+      <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
+    </div>
+  </div>
+</div>

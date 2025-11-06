@@ -1,0 +1,42 @@
+/* src/app/pages/search-results/search-results.component.css */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.receita-card {
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--cor-branco);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.receita-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.receita-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--cor-primaria);
+  font-size: 1.3em;
+}
+
+.receita-card p {
+  font-size: 0.95em;
+  color: var(--cor-texto-claro);
+  margin-bottom: auto;
+  padding-bottom: 15px;
+}
+
+.receita-card .btn-detalhes {
+  margin-top: 15px;
+  align-self: flex-start;
+}

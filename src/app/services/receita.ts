@@ -82,4 +82,17 @@ export class ReceitaService {
   removerReceitaSalva(receitaId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${receitaId}/salvar`);
   }
+
+  getMinhasReceitas(): Observable<Receita[]> {
+    // Chama o endpoint que criamos no back-end
+    return this.http.get<Receita[]>(`${this.apiUrl}/minhas-receitas`);
+  }
+
+  searchReceitas(termo: string): Observable<Receita[]> {
+    // Cria os parâmetros de URL, ex: ?q=bolo
+    let params = new HttpParams().set('q', termo);
+
+    // Chama o endpoint GET /api/receitas/search
+    return this.http.get<Receita[]>(`${this.apiUrl}/search`, { params: params });
+  }
 }

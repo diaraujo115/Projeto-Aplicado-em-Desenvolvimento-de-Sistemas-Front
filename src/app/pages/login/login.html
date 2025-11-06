@@ -7,14 +7,30 @@
   <div class="right-pane">
     <div class="form-wrapper"> <h2>Login</h2>
       <form (ngSubmit)="onSubmit()">
+
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" [(ngModel)]="dadosLogin.email" required>
+          <input type="email" id="email" name="email" [(ngModel)]="dadosLogin.email" #email="ngModel" required email>
+
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+              <div *ngIf="email.errors?.['required']">Email é obrigatório.</div>
+              <div *ngIf="email.errors?.['email']">Por favor, insira um email válido.</div>
+            </div>
         </div>
+
+
         <div class="form-group">
           <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha" [(ngModel)]="dadosLogin.senha" required>
+          <input type="password" id="senha" name="senha" [(ngModel)]="dadosLogin.senha" #senha="ngModel"
+             required>
+
+             <div *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="error-message">
+              <div *ngIf="senha.errors?.['required']">Senha é obrigatória.</div>
+            </div>
         </div>
+
+
+
         <button type="submit">Entrar</button>
       </form>
       <div class="link-cadastro">

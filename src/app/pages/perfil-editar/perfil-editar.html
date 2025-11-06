@@ -1,0 +1,20 @@
+<div class="perfil-editar-container">
+  <a routerLink="/perfil" class="btn-voltar">← Voltar para Minha Conta</a>
+  
+  <h2>Editar Meu Perfil</h2>
+  
+  <form (ngSubmit)="onSubmit()" class="form-wrapper">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" [(ngModel)]="dadosPerfil.nome" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="senha">Nova Senha:</label>
+      <input type="password" id="senha" name="senha" [(ngModel)]="dadosPerfil.senha" 
+             placeholder="Deixe em branco para não alterar">
+    </div>
+    
+    <button type="submit">Salvar Alterações</button>
+  </form>
+</div>

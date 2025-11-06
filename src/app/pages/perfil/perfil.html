@@ -1,0 +1,50 @@
+<div class="perfil-container container">
+  <h1>Minha Conta</h1>
+
+  <section class="configuracoes">
+    <h3>Configurações do Perfil</h3>
+    <div>
+    <a routerLink="/perfil/editar" class="btn-editar">Editar Meu Perfil</a>
+    </div>
+    <button *ngIf="!confirmandoDelete" (click)="iniciarConfirmacaoDelete()" class="btn-deletar">
+    Desativar Minha Conta
+    </button>
+        <div *ngIf="confirmandoDelete" class="confirmacao-delete">
+        <p>Você tem certeza? Esta ação não pode ser desfeita.</p>
+        <button (click)="confirmarDelete()" class="btn-confirmar-sim">Sim, desativar</button>
+        <button (click)="cancelarDelete()" class="btn-cancelar">Cancelar</button>
+        </div>
+  </section>
+
+  <section class="receitas-lista">
+    <h2>Minhas Receitas Criadas ({{ minhasReceitas.length }})</h2>
+    <div *ngIf="minhasReceitas.length === 0; else showMinhasReceitas">
+      <p>Você ainda não criou nenhuma receita.</p>
+    </div>
+    <ng-template #showMinhasReceitas>
+      <div class="card-list">
+        <div *ngFor="let receita of minhasReceitas" class="receita-card">
+          <h3>{{ receita.titulo }}</h3>
+          <p>{{ receita.descricao }}</p>
+          <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
+        </div>
+      </div>
+    </ng-template>
+  </section>
+
+  <section class="receitas-lista">
+    <h2>Minhas Receitas Favoritas ({{ receitasSalvas.length }})</h2>
+    <div *ngIf="receitasSalvas.length === 0; else showReceitasSalvas">
+      <p>Você ainda não favoritou nenhuma receita.</p>
+    </div>
+    <ng-template #showReceitasSalvas>
+      <div class="card-list">
+        <div *ngFor="let receita of receitasSalvas" class="receita-card">
+          <h3>{{ receita.titulo }}</h3>
+          <p>{{ receita.descricao }}</p>
+          <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
+        </div>
+      </div>
+    </ng-template>
+  </section>
+</div>

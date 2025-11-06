@@ -3,6 +3,7 @@ import { Auth } from '../../services/auth';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router,RouterLink } from '@angular/router'; 
+import { NotificationService } from '../../services/notification';
 
 @Component({
   selector: 'app-cadastro',
@@ -19,20 +20,17 @@ export class Cadastro{
   };
 
   // Injetar o Router
-  constructor(private authService: Auth, private router: Router) {}
+  constructor(private authService: Auth, private router: Router, private notificationService: NotificationService) {}
 
   onSubmit(): void {
     this.authService.cadastrar(this.dadosCadastro).subscribe({
       next: (response) => {
-        console.log('Cadastro bem-sucedido!', response);
-        alert('Cadastro realizado com sucesso! Você será redirecionado para o login.');
+        this.notificationService.show('Cadastro realizado com sucesso!', 'success');
         this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error('Falha no cadastro', err)
-        // pode adicionar uma lógica mais inteligente
-        // para verificar o tipo de erro (ex: email já existe)
-        alert('Falha ao realizar o cadastro. Verifique seus dados.');
+        this.notificationService.show('Falha ao realizar o cadastro.', 'error');
       }
     });
   }

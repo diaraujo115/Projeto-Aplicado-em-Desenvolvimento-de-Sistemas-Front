@@ -6,6 +6,17 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+.header-info h1 {
+  margin-top: 0;
+  margin-bottom: 5px; /* Pouco espaço entre título e autor */
+}
+.header-info p {
+  font-size: 1em;
+  color: var(--cor-texto-claro);
+  margin-bottom: 15px; /* Espaço abaixo do autor/data */
+  margin-top: 0;
+}
+
 .btn-voltar {
   margin-bottom: 25px;
   background-color: var(--cor-texto-claro); /* Cor diferente para voltar */
@@ -15,8 +26,12 @@
 }
 
 .detalhe-container header {
-  position: relative;
-  border-bottom: 2px solid var(--cor-primaria); /* Borda laranja */
+  display: block;  /* Faz os elementos se empilharem verticalmente */
+  position: static; /* Garante que o botão não seja absoluto */
+  
+  border-bottom: 2px solid var(--cor-primaria);
+  padding-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .detalhe-container header h1 {
@@ -32,19 +47,22 @@
 
 .rating {
   font-weight: bold;
-  color: var(--cor-acento); /* Média em amarelo */
+  color: var(--cor-acento);
+  margin-bottom: 15px; /* Espaço abaixo da média */
+  font-size: 1.1em;
 }
 
 .btn-salvar {
-    
-    top: 0px; /* Ajustar posição */
-    right: 0px;
-    background-color: var(--cor-branco);
-    color: var(--cor-secundaria); /* Coração vermelho */
-    border: 1px solid var(--cor-secundaria);
-    font-size: 1.5em; /* Aumentar tamanho (se usar ícone) */
-    padding: 5px 10px; /* Ajustar padding */
-    line-height: 1;
+  /* Remove posicionamento absoluto */
+  position: static; 
+  margin: 0; /* Remove margens automáticas */
+  
+  /* Estiliza o botão (pode ajustar como quiser) */
+  background-color: var(--cor-branco);
+  color: var(--cor-secundaria);
+  border: 1px solid var(--cor-secundaria);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-salvar:hover {

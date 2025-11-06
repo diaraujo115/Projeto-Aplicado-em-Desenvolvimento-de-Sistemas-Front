@@ -25,12 +25,15 @@ body {
 
 /* Container principal */
 .container {
-  max-width: 1140px;
-  margin: 30px auto;
-  padding: 25px 30px;
-  background-color: var(--cor-branco);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
+  max-width: 1140px;      /* Define a largura máxima do conteúdo */
+  margin-left: auto;        /* Centraliza horizontalmente */
+  margin-right: auto;       /* Centraliza horizontalmente */
+  padding-left: 40px;       /* Adiciona espaçamento na esquerda */
+  padding-right: 40px;      /* Adiciona espaçamento na direita */
+  padding-top: 25px;        /* Espaçamento no topo */
+  padding-bottom: 25px;     /* Espaçamento embaixo */
+  width: 100%;
+  box-sizing: border-box; /* Garante que o padding não estoure a largura */
 }
 
 /* Estilos para botões e links como botões */
@@ -125,4 +128,19 @@ a {
 a:hover {
     color: #e69500;
     text-decoration: underline;
+}
+
+.error-message {
+  color: #dc3545; /* Vermelho */
+  font-size: 0.85em;
+  text-align: left;
+  margin-top: 5px;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+input.ng-invalid.ng-touched:focus {
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
 }

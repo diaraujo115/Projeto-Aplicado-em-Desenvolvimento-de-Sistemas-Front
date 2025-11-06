@@ -1,0 +1,51 @@
+/* src/app/pages/perfil-editar/perfil-editar.component.css */
+
+.perfil-editar-container {
+  max-width: 600px; /* Um pouco mais largo que o login */
+  margin: 0 auto; /* Centraliza na área de conteúdo */
+  padding: 30px;
+  background-color: var(--cor-branco);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--cor-borda);
+}
+
+.btn-voltar {
+  background-color: var(--cor-texto-claro);
+  margin-bottom: 25px;
+}
+.btn-voltar:hover {
+  background-color: #5a6268;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.form-wrapper {
+  /* O formulário em si */
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--cor-texto-claro);
+}
+
+.form-group input {
+  /* Estilos globais já devem ser aplicados */
+}
+
+.form-group input::placeholder {
+    color: #aaa;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
+  margin-top: 15px;
+}

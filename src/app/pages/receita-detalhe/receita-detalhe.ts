@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReceitaService } from '../../services/receita';
 import { ReceitaDetalhe, Comentario } from '../../interfaces/receita';
 import { FormsModule } from '@angular/forms';
+import { NotificationService } from '../../services/notification';
 
 @Component({
   selector: 'app-receita-detalhe',
@@ -26,7 +27,8 @@ export class ReceitaDetalheComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, // Para ler a URL
-    private receitaService: ReceitaService
+    private receitaService: ReceitaService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +40,10 @@ export class ReceitaDetalheComponent implements OnInit {
       // Busca os detalhes da receita
       this.receitaService.getReceitaPorId(this.receitaId).subscribe({
         next: (response) => { this.receita = response; },
-        error: (err) => { console.error('Erro ao carregar detalhes', err); }
+        error: (err) => { 
+          console.error('Erro ao carregar detalhes', err); 
+          this.notificationService.show('Erro ao carregar Detalhes', 'error')
+        }
       });
 
       this.buscarDetalhesReceita();
@@ -57,7 +62,11 @@ export class ReceitaDetalheComponent implements OnInit {
     if (this.receitaId) {
       this.receitaService.getComentarios(this.receitaId).subscribe({
         next: (response) => { this.comentarios = response; },
-        error: (err) => { console.error('Erro ao carregar comentários', err); }
+        error: (err) => { 
+          console.error('Erro ao carregar comentários', err);
+          this.notificationService.show('Erro ao carregar comentários', 'error')
+        
+        }
       });
     }
   }
@@ -67,6 +76,7 @@ export class ReceitaDetalheComponent implements OnInit {
     if (this.novoComentarioTexto.trim() && this.receitaId) {
       this.receitaService.adicionarComentario(this.receitaId, this.novoComentarioTexto).subscribe({
         next: (novoComentarioAdicionado) => {
+          this.notificationService.show('Comentário adicionado!', 'success')
           console.log('Comentário adicionado:', novoComentarioAdicionado);
           // Adiciona o novo comentário à lista exibida na tela
           this.comentarios.push(novoComentarioAdicionado);
@@ -85,16 +95,19 @@ export class ReceitaDetalheComponent implements OnInit {
       this.receitaService.classificarReceita(this.receitaId, this.notaSelecionada).subscribe({
         next: (response) => {
           console.log('Classificação enviada:', response);
-          alert(`Você avaliou esta receita com ${this.notaSelecionada} estrela(s)!`);
+          
+          this.notificationService.show(`Você avaliou esta receita com ${this.notaSelecionada} estrela(s)!`, 'success')
+
            this.buscarDetalhesReceita() 
         },
         error: (err) => {
           console.error('Erro ao classificar', err);
-          alert('Não foi possível enviar sua avaliação. Tente novamente.');
+          this.notificationService.show('Não foi possível enviar sua avaliação. Tente novamente.', 'error')
         }
       });
     } else {
-      alert('Por favor, selecione uma nota (clique em uma estrela) antes de avaliar.');
+      
+      this.notificationService.show('Por favor, selecione uma nota (clique em uma estrela) antes de avaliar.', 'error')
     }
   }
 
@@ -114,7 +127,10 @@ export class ReceitaDetalheComponent implements OnInit {
       if(this.receitaId) {
           this.receitaService.getReceitaPorId(this.receitaId).subscribe({
             next: (response) => { this.receita = response; },
-            error: (err) => { console.error('Erro ao recarregar detalhes', err); }
+            error: (err) => { 
+              console.error('Erro ao recarregar detalhes', err);
+              this.notificationService.show('Erro ao recarregar detalhes', 'error')
+             }
           });
       }
   }
@@ -132,7 +148,7 @@ export class ReceitaDetalheComponent implements OnInit {
           // Se der erro (ex: 404 Not Found), significa que o usuário não avaliou ainda
           this.minhaNotaSalva = 0;
           this.notaSelecionada = 0;
-          console.log('Usuário ainda não classificou esta receita.');
+          
         }
       });
     }
@@ -163,11 +179,12 @@ export class ReceitaDetalheComponent implements OnInit {
       this.receitaService.removerReceitaSalva(this.receitaId).subscribe({
         next: () => {
           this.receitaEstaSalva = false;
-          alert('Receita removida dos seus favoritos!');
+          //alert('Receita removida dos seus favoritos!');
+          this.notificationService.show('Receita removida dos seus favoritos!', 'success')
         },
         error: (err) => {
           console.error('Erro ao remover receita salva', err);
-          alert('Não foi possível remover a receita. Tente novamente.');
+          this.notificationService.show('Não foi possível remover a receita. Tente novamente.', 'error')
         }
       });
     } else {
@@ -175,11 +192,11 @@ export class ReceitaDetalheComponent implements OnInit {
       this.receitaService.salvarReceita(this.receitaId).subscribe({
         next: () => {
           this.receitaEstaSalva = true;
-          alert('Receita salva nos seus favoritos!');
+          this.notificationService.show('Receita salva nos seus favoritos!', 'success')
         },
         error: (err) => {
           console.error('Erro ao salvar receita', err);
-          alert('Não foi possível salvar a receita. Tente novamente.');
+          this.notificationService.show('Erro ao salvar receita', 'error')
         }
       });
     }

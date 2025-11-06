@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common'; // Importante para *ngIf
 import { RouterOutlet, RouterLink, Router } from '@angular/router'; // Importante para <router-outlet>
 import { FormsModule } from '@angular/forms'; // Importante para [(ngModel)]
 import { Auth } from './services/auth';
+import { NotificationComponent } from './components/notification/notification';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  // Garanta que todos estes estão no array de imports
-  imports: [CommonModule, RouterOutlet, RouterLink, FormsModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, FormsModule, NotificationComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

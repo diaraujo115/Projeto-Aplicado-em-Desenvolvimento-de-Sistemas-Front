@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms'; // Importar
 import { CommonModule } from '@angular/common'; // Importar
 import { Auth } from '../../services/auth';
 import { Router, RouterLink } from '@angular/router';
+import { NotificationService } from '../../services/notification';
 
 @Component({
   selector: 'app-login',
@@ -18,19 +19,22 @@ export class Login {
     senha: ''
   };
 
-  constructor(private authService: Auth, private router: Router) {}
+  constructor(
+    private authService: Auth, 
+    private router: Router, 
+    private notificationService: NotificationService) {}
 
   onSubmit(): void {
     this.authService.login(this.dadosLogin).subscribe({
       next: (response) => {
-        console.log('Login bem-sucedido!', response);
+        this.notificationService.show('Login realizado com sucesso!', 'success');
         // Salva o token no armazenamento local do navegador
         localStorage.setItem('authToken', response.token);
         this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error('Falha no login', err);
-        alert('Email ou senha incorretos.');
+        this.notificationService.show('Email ou senha incorretos.', 'error');
       }
     });
   }

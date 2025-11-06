@@ -1,0 +1,26 @@
+/* src/app/components/notification/notification.component.css */
+:host {
+  position: fixed; /* Fica fixo na tela */
+  top: 20px;
+  right: 20px;
+  z-index: 9999; /* Garante que fique acima de tudo */
+}
+
+.notification-toast {
+  padding: 15px 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
+  margin-bottom: 10px;
+}
+
+/* Cores baseadas nas variáveis globais */
+.notification-toast.success {
+  background-color: #28a745; /* Verde sucesso */
+}
+
+.notification-toast.error {
+  background-color: var(--cor-secundaria); /* Vermelho erro */
+}

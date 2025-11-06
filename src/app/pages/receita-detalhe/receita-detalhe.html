@@ -1,4 +1,4 @@
-<div class="detalhe-container">
+<div class="detalhe-container container">
   <a routerLink="/home" class="btn-voltar">← Voltar para a lista</a>
 
   <div *ngIf="!receita; else showReceita">
@@ -7,11 +7,15 @@
 
   <ng-template #showReceita>
     <header>
-      <h1>{{ receita?.titulo }}</h1>
-      <p>Por: {{ receita?.usuario?.nome }} | Data: {{ receita?.dataCriacao | date: 'dd/MM/yyyy' }}</p>
+      <div class="header-info">
+        <h1>{{ receita?.titulo }}</h1>
+        <p>Por: {{ receita?.usuario?.nome }} | Data: {{ receita?.dataCriacao | date: 'dd/MM/yyyy' }}</p>
+      </div>
+      
       <div class="rating">
         Média de Avaliações: {{ receita?.mediaAvaliacoes ? (receita?.mediaAvaliacoes | number: '1.1-1') : 'N/A' }} ★
       </div>
+      
       <button 
         class="btn-salvar" 
         (click)="toggleSalvarReceita()"
