@@ -1,9 +1,4 @@
-<app-notification></app-notification> <header class="app-header">
-  </header>
-
-<main class="main-content">
-  <router-outlet></router-outlet>
-</main>
+<app-notification></app-notification>
 
 <header class="app-header">
   <nav class="header-content">
@@ -12,7 +7,7 @@
     </a>
 
     <div class="right-nav-group">
-      <div class="search-container">
+      <div class="search-container" *ngIf="!isAuthPage">
         <input type="text" placeholder="Procurar receita..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()">
         <button (click)="onSearch()">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

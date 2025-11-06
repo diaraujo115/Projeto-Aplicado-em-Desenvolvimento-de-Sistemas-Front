@@ -8,7 +8,6 @@ import { ReceitaService } from '../../services/receita';
 import { NotificationService } from '../../services/notification';
 
 
-// Interface para a linha do ingrediente no formulário
 interface IngredienteFormLinha {
   ingredienteId: number | null;
   quantidade: string;
@@ -18,13 +17,12 @@ interface IngredienteFormLinha {
 @Component({
   selector: 'app-receita-nova',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink], // Adicionar FormsModule e RouterLink
+  imports: [CommonModule, FormsModule, RouterLink], 
   templateUrl: './receita-nova.html',
   styleUrls: ['./receita-nova.css']
 })
 export class ReceitaNova implements OnInit {
 
-  // Objeto principal do formulário
   receita = {
     titulo: '',
     descricao: '',
@@ -33,10 +31,8 @@ export class ReceitaNova implements OnInit {
     dieta: ''
   };
 
-  // Array dinâmico para os ingredientes
   ingredientesDaReceita: IngredienteFormLinha[] = [];
 
-  // Lista de todos os ingredientes do banco (para os dropdowns)
   listaDeTodosIngredientes: Ingrediente[] = [];
 
   constructor(
@@ -47,7 +43,6 @@ export class ReceitaNova implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Carrega a lista de ingredientes do banco
     this.ingredienteService.getIngredientes().subscribe({
       next: (data) => {
         this.listaDeTodosIngredientes = data;
@@ -55,11 +50,9 @@ export class ReceitaNova implements OnInit {
       error: (err) => console.error('Erro ao buscar ingredientes', err)
     });
 
-    // Inicia com uma linha de ingrediente
     this.adicionarLinhaIngrediente();
   }
 
-  // Adiciona uma nova linha em branco ao formulário de ingredientes
   adicionarLinhaIngrediente(): void {
     this.ingredientesDaReceita.push({
       ingredienteId: null,
@@ -68,7 +61,6 @@ export class ReceitaNova implements OnInit {
     });
   }
 
-  // Remove uma linha pelo seu índice
   removerLinhaIngrediente(index: number): void {
     if (this.ingredientesDaReceita.length > 1) {
       this.ingredientesDaReceita.splice(index, 1);
@@ -77,26 +69,21 @@ export class ReceitaNova implements OnInit {
     }
   }
 
-  // Envia o formulário completo para o back-end
   onSubmit(): void {
-    // 1. Formata os dados dos ingredientes para o formato que o back-end espera
     const ingredientesFormatados = this.ingredientesDaReceita.map(linha => ({
       ingrediente: { id: linha.ingredienteId },
       quantidade: linha.quantidade,
       unidade: linha.unidade
     }));
 
-    // 2. Cria o objeto final da receita
     const dadosFinais = {
       ...this.receita,
       ingredientes: ingredientesFormatados
     };
 
-    // 3. Envia para o serviço
     this.receitaService.criarReceita(dadosFinais).subscribe({
       next: (receitaCriada) => {
         this.notificationService.show('Receita criada com sucesso!', 'success');
-        // 4. Redireciona para a página de detalhes da nova receita
         this.router.navigate(['/receita', receitaCriada.id]);
       },
       error: (err) => {

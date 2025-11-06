@@ -1,10 +1,11 @@
 // src/app/app.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Importante para *ngIf
-import { RouterOutlet, RouterLink, Router } from '@angular/router'; // Importante para <router-outlet>
+import { RouterOutlet, RouterLink, Router, NavigationEnd} from '@angular/router'; // Importante para <router-outlet>
 import { FormsModule } from '@angular/forms'; // Importante para [(ngModel)]
 import { Auth } from './services/auth';
 import { NotificationComponent } from './components/notification/notification';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -18,7 +19,24 @@ export class App {
   title = 'receitas-despensa-frontend';
   searchTerm: string = '';
 
-  constructor(private authService: Auth, private router: Router) {}
+  public isAuthPage: boolean = false;
+
+  constructor(private authService: Auth, private router: Router) {
+
+
+  this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (event.url.includes('/login') || event.url.includes('/cadastro')) {
+          this.isAuthPage = true;
+        } else {
+          this.isAuthPage = false;
+        }
+      }
+    });
+  }
+
 
   // Método que será chamado pelo HTML
   isLoggedIn(): boolean {
