@@ -183,3 +183,31 @@
 .nutri-lista li strong {
   color: var(--cor-texto);
 }
+
+.tags-dieta h3 {
+  border-bottom: 2px solid var(--cor-primaria); /* Laranja, para combinar */
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  color: var(--cor-texto);
+}
+
+.tag-lista {
+  display: flex;
+  flex-wrap: wrap; /* Permite que as tags quebrem a linha */
+  gap: 10px; /* Espaço entre as tags */
+}
+
+.tag-item {
+  background-color: #fff2e0; /* Fundo laranja bem claro */
+  color: #c27d00; /* Texto laranja escuro */
+  padding: 6px 12px;
+  border-radius: 15px; /* Bordas arredondadas (pílula) */
+  font-size: 0.9em;
+  font-weight: 500;
+  border: 1px solid #ffe8c7; /* Borda laranja sutil */
+}
+
+/* Você pode adicionar estilos específicos para tags se quiser */
+.tag-item:hover {
+  background-color: #ffe8c7; /* Escurece um pouco no hover */
+}

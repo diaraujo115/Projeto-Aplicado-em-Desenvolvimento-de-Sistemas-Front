@@ -33,21 +33,11 @@ export class ReceitaNova implements OnInit {
     "Sopa"
   ];
 
-  public dietasDisponiveis: string[] = [
-    "Nenhuma",
-    "Vegetariana",
-    "Vegana",
-    "Sem Glúten",
-    "Sem Lactose",
-    "Low Carb"
-  ];
-
   receita = {
     titulo: '',
     descricao: '',
     modoPreparo: '',
-    categoria: '',
-    dieta: ''
+    categoria: ''
   };
 
   ingredientesDaReceita: IngredienteFormLinha[] = [];
@@ -76,9 +66,8 @@ export class ReceitaNova implements OnInit {
     this.adicionarPasso();
 
     this.receita.categoria = this.categoriasDisponiveis[0];
-    this.receita.dieta = this.dietasDisponiveis[0];
 
-    
+  
   }
 
   adicionarLinhaIngrediente(): void {
