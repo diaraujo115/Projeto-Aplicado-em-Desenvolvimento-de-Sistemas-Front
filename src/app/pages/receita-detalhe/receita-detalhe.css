@@ -145,3 +145,21 @@
 .classificacao button { /* Botão avaliar */
     /* Já estilizado globalmente, pode adicionar ajustes se precisar */
 }
+
+.nutri-lista {
+  list-style: none;
+  padding: 0;
+  display: grid;
+
+  gap: 10px;
+  background-color: #fdfdfd;
+  border: 1px solid var(--cor-borda);
+  padding: 15px;
+  border-radius: 5px;
+}
+.nutri-lista li {
+  font-size: 0.95em;
+}
+.nutri-lista li strong {
+  color: var(--cor-texto);
+}

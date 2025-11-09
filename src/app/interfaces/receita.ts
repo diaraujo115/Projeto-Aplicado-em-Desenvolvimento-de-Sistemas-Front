@@ -30,6 +30,7 @@ export interface ReceitaDetalhe {
   usuario: UsuarioDTO;
   ingredientes: IngredienteDTO[];
   mediaAvaliacoes: number | null;
+  informacaoNutricional: InformacaoNutricional | null;
 }
 
 export interface Comentario {
@@ -40,4 +41,15 @@ export interface Comentario {
     id: number;
     nome: string;
   };
+}
+
+export interface InformacaoNutricional {
+  calorias: number;
+  proteinas: number;
+  carboidratos: number;
+  gorduras: number;
+  fibra: number;
+  acucar: number;
+  sodio: number;
+  gorduraSaturada: number;
 }
