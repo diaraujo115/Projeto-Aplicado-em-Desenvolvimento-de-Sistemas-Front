@@ -54,6 +54,8 @@ export class ReceitaNova implements OnInit {
 
   listaDeTodosIngredientes: Ingrediente[] = [];
 
+  public passosDePreparo: string[] = [];
+
   constructor(
     private ingredienteService: IngredienteService,
     private receitaService: ReceitaService,
@@ -71,8 +73,12 @@ export class ReceitaNova implements OnInit {
 
     this.adicionarLinhaIngrediente();
 
+    this.adicionarPasso();
+
     this.receita.categoria = this.categoriasDisponiveis[0];
     this.receita.dieta = this.dietasDisponiveis[0];
+
+    
   }
 
   adicionarLinhaIngrediente(): void {
@@ -98,10 +104,16 @@ export class ReceitaNova implements OnInit {
       unidade: linha.unidade
     }));
 
+    const modoPreparoString = this.passosDePreparo
+        .map((passo, index) => `${index + 1}. ${passo}`) 
+        .join('\n'); 
+
     const dadosFinais = {
       ...this.receita,
+      modoPreparo: modoPreparoString,
       ingredientes: ingredientesFormatados
     };
+    
 
     this.receitaService.criarReceita(dadosFinais).subscribe({
       next: (receitaCriada) => {
@@ -113,5 +125,22 @@ export class ReceitaNova implements OnInit {
         this.notificationService.show('Falha ao criar receita. Verifique os campos.', 'error');
       }
     });
+  }
+
+  adicionarPasso(): void {
+    this.passosDePreparo.push('');
+  }
+
+  removerPasso(index: number): void {
+    if (this.passosDePreparo.length > 1) {
+      this.passosDePreparo.splice(index, 1);
+    } else {
+      this.notificationService.show('A receita deve ter pelo menos um passo.', 'error');
+    }
+  }
+
+  // Permite que o *ngFor funcione corretamente ao editar os campos
+  trackByIndex(index: number, obj: any): any {
+    return index;
   }
 }

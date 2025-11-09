@@ -110,16 +110,36 @@
   color: var(--cor-texto);
 }
 
-/* Comentários */
+.novo-comentario {
+  width: 100%; 
+}
+
 .novo-comentario textarea {
-  margin-bottom: 10px;
+  width: 100%; /* Faz o textarea ocupar toda a largura */
+  padding: 12px 15px; /* Mesmo padding dos outros inputs */
+  border: 1px solid var(--cor-borda);
+  border-radius: 5px;
+  box-sizing: border-box; /* Garante que padding não estoure a largura */
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif; /* Garante a mesma fonte */
+  margin-bottom: 10px; /* Espaço antes do botão */
+  resize: none; /* Permite redimensionar só para baixo */
+  min-height: 80px; /* Altura mínima inicial */
+  transition: border-color 0.3s ease;
 }
 .novo-comentario button {
-    background-color: var(--cor-secundaria); /* Botão comentar vermelho */
+    background-color: var(--cor-secundaria); 
+    margin-bottom: 30px;
 }
 .novo-comentario button:hover:not(:disabled) {
     background-color: #cc503a;
 }
+.novo-comentario textarea:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
+}
+
 
 .comentario-card {
   border-left: 4px solid var(--cor-primaria); /* Borda lateral laranja */

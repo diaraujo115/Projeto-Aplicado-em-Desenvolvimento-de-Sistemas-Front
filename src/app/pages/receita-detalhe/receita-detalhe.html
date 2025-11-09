@@ -59,23 +59,40 @@
       <div [innerHTML]="(receita?.modoPreparo || '').split('\n').join('<br>')"></div>
     </section>
 
+    <section class="nutricional" *ngIf="receita?.informacaoNutricional">
+        <h3>Informações Nutricionais (Total)</h3>
+        <ul class="nutri-lista">
+          <li><strong>Calorias:</strong> {{ receita?.informacaoNutricional?.calorias | number: '1.0-0' }} kcal</li>
+          <li><strong>Proteínas:</strong> {{ receita?.informacaoNutricional?.proteinas | number: '1.0-1' }} g</li>
+          <li><strong>Carboidratos:</strong> {{ receita?.informacaoNutricional?.carboidratos | number: '1.0-1' }} g</li>
+          <li><strong>Gorduras:</strong> {{ receita?.informacaoNutricional?.gorduras | number: '1.0-1' }} g</li>
+          <li><strong>Gord. Saturada:</strong> {{ receita?.informacaoNutricional?.gorduraSaturada | number: '1.0-1' }} g</li>
+          <li><strong>Açúcar:</strong> {{ receita?.informacaoNutricional?.acucar | number: '1.0-1' }} g</li>
+          <li><strong>Fibra:</strong> {{ receita?.informacaoNutricional?.fibra | number: '1.0-1' }} g</li>
+          <li><strong>Sódio:</strong> {{ receita?.informacaoNutricional?.sodio | number: '1.0-0' }} mg</li>
+        </ul>
+      </section>
+      <section class="nutricional" *ngIf="!receita?.informacaoNutricional">
+          <p><i>Informações nutricionais não disponíveis para esta receita.</i></p>
+    </section>
+
     <section class="comentarios">
   <h3>Comentários</h3>
-
+<div *ngIf="comentarios.length === 0">
+      <p>Seja o primeiro a comentar!</p>
+    </div>
   <div class="novo-comentario">
     <textarea 
       [(ngModel)]="novoComentarioTexto" 
       placeholder="Escreva seu comentário aqui..."
-      rows="3"></textarea>
+      rows="5"></textarea>
     <button (click)="adicionarComentario()" [disabled]="!novoComentarioTexto.trim()">
       Comentar
     </button>
   </div>
 
   <div class="lista-comentarios">
-    <div *ngIf="comentarios.length === 0">
-      <p>Seja o primeiro a comentar!</p>
-    </div>
+    
 
     <div *ngFor="let comentario of comentarios" class="comentario-card">
       <p><strong>{{ comentario.usuario.nome }}</strong> <span> em {{ comentario.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</span></p>

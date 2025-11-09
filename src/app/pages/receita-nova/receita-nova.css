@@ -64,7 +64,15 @@ h2 {
   cursor: pointer;
   margin-bottom: 22px; /* Alinha com os inputs */
   flex-shrink: 0;
+  display: flex;
+  align-items: center;      /* Centraliza verticalmente */
+  justify-content: center;  /* Centraliza horizontalmente */
+  padding: 0;
+  line-height: 1; /* Força a altura da linha do texto */
+  box-sizing: border-box;
 }
+
+
 .btn-remover-linha:hover {
   background-color: #c82333;
 }
@@ -86,4 +94,20 @@ h2 {
   padding: 15px;
   font-size: 1.2em;
   font-weight: bold;
+}
+
+.passo-linha {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start; 
+  margin-bottom: 15px;
+}
+
+.passo-linha .form-group {
+  flex-grow: 1; 
+}
+
+/* O botão de remover usa o mesmo estilo da linha de ingrediente */
+.passo-linha .btn-remover-linha {
+  margin-top: 30px; /* Alinha o botão com o textarea */
 }

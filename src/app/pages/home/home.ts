@@ -21,8 +21,19 @@ export class Home implements OnInit{
   filtroDieta: string = '';
 
   // (Opcional) Listas para preencher os dropdowns
-  categoriasDisponiveis: string[] = ['Bolos', 'Sobremesa', 'Prato Principal', 'Lanche']; 
-  dietasDisponiveis: string[] = ['Vegetariana', 'Sem Glúten', 'Low Carb']; 
+  categoriasDisponiveis: string[] = ["Sobremesa",
+    "Prato Principal",
+    "Lanche",
+    "Aperitivo",
+    "Bebida",
+    "Salada",
+    "Sopa"]; 
+  dietasDisponiveis: string[] = [
+    "Vegetariana",
+    "Vegana",
+    "Sem Glúten",
+    "Sem Lactose",
+    "Low Carb"]; 
 
   constructor(
     private authService: Auth,private receitaService: ReceitaService ) {}
