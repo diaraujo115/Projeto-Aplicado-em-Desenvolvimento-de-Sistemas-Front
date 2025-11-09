@@ -23,6 +23,25 @@ interface IngredienteFormLinha {
 })
 export class ReceitaNova implements OnInit {
 
+  public categoriasDisponiveis: string[] = [
+    "Sobremesa",
+    "Prato Principal",
+    "Lanche",
+    "Aperitivo",
+    "Bebida",
+    "Salada",
+    "Sopa"
+  ];
+
+  public dietasDisponiveis: string[] = [
+    "Nenhuma",
+    "Vegetariana",
+    "Vegana",
+    "Sem Glúten",
+    "Sem Lactose",
+    "Low Carb"
+  ];
+
   receita = {
     titulo: '',
     descricao: '',
@@ -51,6 +70,9 @@ export class ReceitaNova implements OnInit {
     });
 
     this.adicionarLinhaIngrediente();
+
+    this.receita.categoria = this.categoriasDisponiveis[0];
+    this.receita.dieta = this.dietasDisponiveis[0];
   }
 
   adicionarLinhaIngrediente(): void {
