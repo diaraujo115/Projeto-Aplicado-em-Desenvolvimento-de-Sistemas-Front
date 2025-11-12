@@ -6,23 +6,31 @@
   </div>
 
   <ng-template #showReceita>
+
     <header>
+    <img *ngIf="receita?.imagemUrl"
+         [src]="'http://localhost:8080/api/images/' + receita?.imagemUrl"
+         alt="{{ receita?.titulo }}"
+         class="detalhe-image-thumbnail"> <div *ngIf="!receita?.imagemUrl" class="detalhe-image-placeholder">
+      <span>Sem Foto</span>
+    </div>
+
+    <div class="header-content-wrapper">
       <div class="header-info">
         <h1>{{ receita?.titulo }}</h1>
         <p>Por: {{ receita?.usuario?.nome }} | Data: {{ receita?.dataCriacao | date: 'dd/MM/yyyy' }}</p>
       </div>
-      
       <div class="rating">
         Média de Avaliações: {{ receita?.mediaAvaliacoes ? (receita?.mediaAvaliacoes | number: '1.1-1') : 'N/A' }} ★
       </div>
-      
-      <button 
-        class="btn-salvar" 
+      <button
+        class="btn-salvar"
         (click)="toggleSalvarReceita()"
         [class.salva]="receitaEstaSalva">
-        {{ receitaEstaSalva ? 'Remover dos Favoritos' : 'Favoritar Receita' }}
-        </button>
-    </header>
+        {{ receitaEstaSalva ? 'Remover dos Favoritos' : 'Salvar nos Favoritos' }}
+      </button>
+    </div>
+  </header>
 
     <section class="classificacao">
       <h3>Avalie esta receita:</h3>

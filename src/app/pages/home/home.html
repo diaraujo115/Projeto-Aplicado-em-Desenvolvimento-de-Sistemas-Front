@@ -40,9 +40,21 @@
       </div>
 
       <div *ngFor="let receita of receitas" class="receita-card">
-        <h3>{{ receita.titulo }}</h3>
-        <p>{{ receita.descricao }}</p>
-        <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
+  
+        <div *ngIf="receita.imagemUrl"
+     class="card-image"
+     [style.backgroundImage]="receita.safeImagemUrl"> </div>
+  
+        <div *ngIf="!receita.imagemUrl" class="card-image-placeholder">
+          <span>Sem Foto</span>
+        </div>
+
+        <div class="card-content">
+          <h3>{{ receita.titulo }}</h3>
+          <p>{{ receita.descricao }}</p>
+          <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
+        </div>
+
       </div>
 
       

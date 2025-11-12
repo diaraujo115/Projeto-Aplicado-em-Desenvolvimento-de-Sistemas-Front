@@ -9,12 +9,20 @@
 .header-info h1 {
   margin-top: 0;
   margin-bottom: 5px; /* Pouco espaço entre título e autor */
+  color: #333;
 }
 .header-info p {
   font-size: 1em;
   color: var(--cor-texto-claro);
   margin-bottom: 15px; /* Espaço abaixo do autor/data */
   margin-top: 0;
+}
+
+.header-content-wrapper {
+  flex-grow: 1; /* Faz o conteúdo ocupar o resto do espaço */
+  display: flex;
+  flex-direction: column; /* Empilha o texto e botões verticalmente */
+  align-items: flex-start; /* Alinha tudo à esquerda */
 }
 
 .btn-voltar {
@@ -26,8 +34,10 @@
 }
 
 .detalhe-container header {
-  display: block;  /* Faz os elementos se empilharem verticalmente */
-  position: static; /* Garante que o botão não seja absoluto */
+  display: flex;         /* 1. Alinha imagem e conteúdo lado a lado */
+  flex-direction: row;   /* Garante que fiquem em linha */
+  align-items: flex-start; /* Alinha no topo */
+  gap: 20px;             /* 2. Espaço entre a imagem e o texto */
   
   border-bottom: 2px solid var(--cor-primaria);
   padding-bottom: 15px;
@@ -209,4 +219,27 @@
 
 .tag-item:hover {
   background-color: #ffe8c7; 
+}
+
+.detalhe-image-thumbnail {
+  width: 120px;         /* 3. Largura pequena e fixa */
+  height: 120px;        /* 4. Altura fixa (quadrado) */
+  object-fit: cover;    /* 5. Corta a imagem para caber */
+  border-radius: 8px;   /* 6. Cantos arredondados */
+  flex-shrink: 0;       /* Impede que a imagem encolha */
+}
+
+/* O PLACEHOLDER (para ficar igual à imagem) */
+.detalhe-image-placeholder {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 0.9em;
+  font-style: italic;
+  border-radius: 8px;
 }

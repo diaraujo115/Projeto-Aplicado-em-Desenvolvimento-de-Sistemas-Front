@@ -148,3 +148,18 @@ input.ng-invalid.ng-touched:focus {
 textarea {
   resize: none; 
 }
+
+.card-image {
+  width: 10%;
+  height: auto; 
+ 
+  border-radius: 8px 8px 0 0;
+  display: block; 
+}
+.detalhe-image {
+  width: 100%;
+  height: auto; 
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: block;
+}

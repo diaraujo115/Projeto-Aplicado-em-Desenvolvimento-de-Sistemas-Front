@@ -7,6 +7,7 @@ import { Receita } from '../../interfaces/receita';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,7 @@ export class Home implements OnInit{
   dietasDisponiveis: string[] = [];
 
   constructor(
-    private authService: Auth,private receitaService: ReceitaService , private notificationService: NotificationService) {}
+    private authService: Auth,private receitaService: ReceitaService , private notificationService: NotificationService, private sanitizer: DomSanitizer) {}
 
 
     ngOnInit(): void {
@@ -44,9 +45,17 @@ export class Home implements OnInit{
     this.estaCarregando = true;
     this.receitaService.getReceitas(filtros).subscribe({
       next: (response) => {
-        this.receitas = response;
+
+        this.receitas = response.map(receita => {
+          if (receita.imagemUrl) {
+            const imageUrl = `http://localhost:8080/api/images/${receita.imagemUrl}`;
+            
+            receita.safeImagemUrl = this.sanitizer.bypassSecurityTrustStyle(`url(${imageUrl})`);
+          }
+          return receita;
+        });
+
         this.estaCarregando = false;
-        console.log('Receitas carregadas:', this.receitas);
       },
       error: (err) => { 
         this.notificationService.show('Não foi possível retornar as receitas!', 'error'); 

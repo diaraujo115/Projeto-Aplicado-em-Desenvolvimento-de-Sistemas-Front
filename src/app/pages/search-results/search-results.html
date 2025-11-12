@@ -11,6 +11,10 @@
 
   <div *ngIf="!estaCarregando && resultados.length > 0" class="card-list">
     <div *ngFor="let receita of resultados" class="receita-card">
+      <img *ngIf="receita.imagemUrl" 
+          [src]="'http://localhost:8080/api/images/' + receita.imagemUrl" 
+          alt="{{ receita.titulo }}" 
+          class="card-image">
       <h3>{{ receita.titulo }}</h3>
       <p>{{ receita.descricao }}</p>
       <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>

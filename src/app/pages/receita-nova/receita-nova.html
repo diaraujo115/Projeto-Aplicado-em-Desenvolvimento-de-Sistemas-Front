@@ -1,94 +1,115 @@
 <div class="container form-container">
   <a routerLink="/home" class="btn-voltar">← Voltar</a>
-  <h2>{{ tituloDaPagina }}</h2> 
+  <h2>{{ tituloDaPagina }}</h2>
 
-  <form (ngSubmit)="onSubmit()" #receitaForm="ngForm">
-
-    <div class="form-section">
-      <h3>Informações Básicas</h3>
-      <div class="form-group">
-        <label for="titulo">Título da Receita:</label>
-        <input type="text" id="titulo" name="titulo" [(ngModel)]="receita.titulo" required>
-      </div>
-      <div class="form-group">
-        <label for="descricao">Descrição Curta:</label>
-        <input type="text" id="descricao" name="descricao" [(ngModel)]="receita.descricao" required>
-      </div>
-      <div class="form-group-inline">
-        <div class="form-group">
-          <label for="categoria">Categoria:</label>
-          <select id="categoria" name="categoria" [(ngModel)]="receita.categoria" required>
-            <option *ngFor="let cat of categoriasDisponiveis" [value]="cat">
-              {{ cat }}
-            </option>
-          </select>
-        </div>
-      </div>
+  <div class="form-section">
+    <h3>Imagem da Receita (Opcional)</h3>
+    <div class="form-group">
+      <label for="imagem">Selecione uma imagem:</label>
+      <input type="file" id="imagem" name="imagem" (change)="onFileSelected($event)" accept="image/*">
     </div>
 
-    <div class="form-section">
-      <h3>Ingredientes</h3>
-      <div *ngFor="let ingrediente of ingredientesDaReceita; let i = index" class="ingrediente-linha">
-
-        <div class="form-group ingrediente-nome">
-          <label for="ingrediente-{{i}}">Ingrediente:</label>
-          <select id="ingrediente-{{i}}" name="ingrediente-{{i}}" [(ngModel)]="ingrediente.ingredienteId" required>
-            <option [ngValue]="null" disabled>Selecione...</option>
-            <option *ngFor="let ing of listaDeTodosIngredientes" [value]="ing.id">
-              {{ ing.nome }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group ingrediente-qtd">
-          <label for="quantidade-{{i}}">Qtd.:</label>
-          <input type="text" id="quantidade-{{i}}" name="quantidade-{{i}}" [(ngModel)]="ingrediente.quantidade" required>
-        </div>
-
-        <div class="form-group ingrediente-unidade">
-          <label for="unidade-{{i}}">Unidade:</label>
-          <select id="unidade-{{i}}" name="unidade-{{i}}" [(ngModel)]="ingrediente.unidade" required>
-              <option *ngFor="let un of unidadesDisponiveis" [value]="un">
-                {{ un }}
-              </option>
-            </select>        
-          </div>
-
-        <button type="button" (click)="removerLinhaIngrediente(i)" class="btn-remover-linha" title="Remover Ingrediente">X</button>
-      </div>
-
-      <button type="button" (click)="adicionarLinhaIngrediente()" class="btn-adicionar-linha">+ Adicionar Ingrediente</button>
+    <div *ngIf="imageChangedEvent" class="cropper-container">
+      <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1 / 1" 
+          format="png"
+          (imageCropped)="imageCropped($event)">
+      </image-cropper>
     </div>
 
-    <div class="form-section">
-      <h3>Modo de Preparo</h3>
-      <div *ngFor="let passo of passosDePreparo; let i = index; trackBy: trackByIndex" class="passo-linha">
-        <div class="form-group">
-          <label for="passo-{{i}}">Passo {{ i + 1 }}:</label>
-          <textarea id="passo-{{i}}" name="passo-{{i}}" 
-                    [(ngModel)]="passosDePreparo[i]" 
-                    rows="3" 
-                    required 
-                    placeholder="Descreva este passo...">
-          </textarea>
-        </div>
-        
-        <button type="button" (click)="removerPasso(i)" 
-                class="btn-remover-linha" 
-                title="Remover Passo" 
-                *ngIf="passosDePreparo.length > 1">
-          X
-        </button>
+    <div *ngIf="croppedImage" class="preview-container">
+      <p>Preview (Quadrada):</p>
+      <img [src]="croppedImage" alt="Preview da receita">
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h3>Informações Básicas</h3>
+    <div class="form-group">
+      <label for="titulo">Título da Receita:</label>
+      <input type="text" id="titulo" name="titulo" [(ngModel)]="receita.titulo" required>
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descrição Curta:</label>
+      <input type="text" id="descricao" name="descricao" [(ngModel)]="receita.descricao" required>
+    </div>
+    <div class="form-group-inline">
+      <div class="form-group">
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" name="categoria" [(ngModel)]="receita.categoria" required>
+          <option *ngFor="let cat of categoriasDisponiveis" [value]="cat">
+            {{ cat }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h3>Ingredientes</h3>
+    <div *ngFor="let ingrediente of ingredientesDaReceita; let i = index" class="ingrediente-linha">
+      
+      <div class="form-group ingrediente-nome">
+        <label for="ingrediente-{{i}}">Ingrediente:</label>
+        <select id="ingrediente-{{i}}" name="ingrediente-{{i}}" [(ngModel)]="ingrediente.ingredienteId" required>
+          <option [ngValue]="null" disabled>Selecione...</option>
+          <option *ngFor="let ing of listaDeTodosIngredientes" [value]="ing.id">
+            {{ ing.nome }}
+          </option>
+        </select>
       </div>
       
-      <button type="button" (click)="adicionarPasso()" class="btn-adicionar-linha">
-        + Adicionar Passo
+      <div class="form-group ingrediente-qtd">
+        <label for="quantidade-{{i}}">Qtd.:</label>
+        <input type="text" id="quantidade-{{i}}" name="quantidade-{{i}}" [(ngModel)]="ingrediente.quantidade" required>
+      </div>
+      
+      <div class="form-group ingrediente-unidade">
+        <label for="unidade-{{i}}">Unidade:</label>
+        <select id="unidade-{{i}}" name="unidade-{{i}}" [(ngModel)]="ingrediente.unidade" required>
+          <option *ngFor="let un of unidadesDisponiveis" [value]="un">
+            {{ un }}
+          </option>
+        </select>
+      </div>
+      
+      <button type="button" (click)="removerLinhaIngrediente(i)" class="btn-remover-linha" title="Remover Ingrediente">X</button>
+    </div>
+    
+    <button type="button" (click)="adicionarLinhaIngrediente()" class="btn-adicionar-linha">+ Adicionar Ingrediente</button>
+  </div>
+
+  <div class="form-section">
+    <h3>Modo de Preparo</h3>
+    <div *ngFor="let passo of passosDePreparo; let i = index; trackBy: trackByIndex" class="passo-linha">
+      
+      <div class="form-group">
+        <label for="passo-{{i}}">Passo {{ i + 1 }}:</label>
+        <textarea id="passo-{{i}}" name="passo-{{i}}" 
+                  [(ngModel)]="passosDePreparo[i]" 
+                  rows="3" 
+                  required 
+                  placeholder="Descreva este passo...">
+        </textarea>
+      </div>
+      
+      <button type="button" (click)="removerPasso(i)" 
+              class="btn-remover-linha" 
+              title="Remover Passo" 
+              *ngIf="passosDePreparo.length > 1">
+        X
       </button>
     </div>
-
-    <button type="submit" class="btn-salvar-receita" [disabled]="!receitaForm.form.valid">
-      {{ isEditMode ? 'Salvar Alterações' : 'Salvar Receita' }}
-    </button>
     
-  </form> </div> 
+    <button type="button" (click)="adicionarPasso()" class="btn-adicionar-linha">
+      + Adicionar Passo
+    </button>
+  </div>
 
+  <button (click)="onSubmit()" class="btn-salvar-receita">
+    {{ isEditMode ? 'Salvar Alterações' : 'Salvar Receita' }}
+  </button>
+
+</div>

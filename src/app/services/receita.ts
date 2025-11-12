@@ -85,9 +85,9 @@ export class ReceitaService {
     return this.http.get<Receita[]>(`${this.apiUrl}/search`, { params: params });
   }
 
-  criarReceita(receitaData: any): Observable<ReceitaDetalhe> {
-    return this.http.post<ReceitaDetalhe>(this.apiUrl, receitaData);
-  }
+  criarReceita(formData: FormData): Observable<ReceitaDetalhe> {
+      return this.http.post<ReceitaDetalhe>(this.apiUrl, formData);
+    }
 
   recomendarPorIngredientes(ids: number[]): Observable<Receita[]> {
     let params = new HttpParams();
@@ -102,9 +102,9 @@ export class ReceitaService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  updateReceita(id: number, receitaData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, receitaData);
-  }
+  updateReceita(id: number, formData: FormData): Observable<any> {
+      return this.http.put(`${this.apiUrl}/${id}`, formData);
+    }
 
   getDietasDisponiveis(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/dietas`);

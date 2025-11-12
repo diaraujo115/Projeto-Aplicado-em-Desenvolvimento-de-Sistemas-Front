@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Ingrediente, IngredienteService } from '../../services/ingrediente';
 import { ReceitaService } from '../../services/receita';
 import { NotificationService } from '../../services/notification';
+import { ImageCropperComponent, ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
 
 
 interface IngredienteFormLinha {
@@ -17,7 +18,7 @@ interface IngredienteFormLinha {
 @Component({
   selector: 'app-receita-nova',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink], 
+  imports: [CommonModule, FormsModule, RouterLink, ImageCropperComponent], 
   templateUrl: './receita-nova.html',
   styleUrls: ['./receita-nova.css']
 })
@@ -70,6 +71,10 @@ export class ReceitaNova implements OnInit {
   receitaIdParaEditar: number | null = null;
   tituloDaPagina: string = 'Criar Nova Receita';
 
+  imageChangedEvent: any = ''; 
+  croppedImage: any = ''; 
+  imageFile: File | null = null;
+
   constructor(
     private ingredienteService: IngredienteService,
     private receitaService: ReceitaService,
@@ -79,17 +84,14 @@ export class ReceitaNova implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // 3. VERIFICAR SE ESTÁ EM MODO DE EDIÇÃO
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        // MODO DE EDIÇÃO
         this.isEditMode = true;
         this.receitaIdParaEditar = +id;
         this.tituloDaPagina = 'Editar Receita';
         this.carregarDadosDaReceita(+id);
       } else {
-        // MODO DE CRIAÇÃO
         this.isEditMode = false;
         this.tituloDaPagina = 'Criar Nova Receita';
         this.carregarIngredientesDoBanco();
@@ -116,70 +118,78 @@ export class ReceitaNova implements OnInit {
   }
 
   onSubmit(): void {
-  
-  const modoPreparoString = this.passosDePreparo
-      .map((passo, index) => `${index + 1}. ${passo}`)
-      .join('\n');
+    const modoPreparoString = this.passosDePreparo
+        .map((passo, index) => `${index + 1}. ${passo}`)
+        .join('\n');
 
-  
-  if (this.isEditMode && this.receitaIdParaEditar) {
+    const formData = new FormData();
 
-   
-    const ingredientesUpdate = this.ingredientesDaReceita.map(linha => ({
-      ingredienteId: linha.ingredienteId, 
-      quantidade: linha.quantidade,
-      unidade: linha.unidade
-    }));
-
+    if (this.imageFile) {
+      formData.append('imagem', this.imageFile, this.imageFile.name);
+    }
     
-    const dadosUpdate = {
-      titulo: this.receita.titulo,
-      descricao: this.receita.descricao,
-      categoria: this.receita.categoria,
-      modoPreparo: modoPreparoString,
-      ingredientes: ingredientesUpdate 
-    };
+    if (this.isEditMode && this.receitaIdParaEditar) {
+      
+      
+      const ingredientesUpdate = this.ingredientesDaReceita.map(linha => ({
+        ingredienteId: linha.ingredienteId,
+        quantidade: linha.quantidade,
+        unidade: linha.unidade
+      }));
 
-    this.receitaService.updateReceita(this.receitaIdParaEditar, dadosUpdate).subscribe({
-      next: (receitaAtualizada) => {
-        this.notificationService.show('Receita atualizada com sucesso!', 'success');
-        this.router.navigate(['/receita', this.receitaIdParaEditar]);
-      },
-      error: (err) => {
-        console.error('Erro ao atualizar receita', err);
-        this.notificationService.show('Falha ao atualizar receita.', 'error');
-      }
-    });
+      const dadosUpdate = {
+        titulo: this.receita.titulo,
+        descricao: this.receita.descricao,
+        categoria: this.receita.categoria,
+        modoPreparo: modoPreparoString,
+        ingredientes: ingredientesUpdate 
+      };
+      
+      formData.append('receita', JSON.stringify(dadosUpdate));
+      
+      this.receitaService.updateReceita(this.receitaIdParaEditar, formData).subscribe({
+        next: (receitaAtualizada) => {
+          this.notificationService.show('Receita atualizada com sucesso!', 'success');
+          this.router.navigate(['/receita', this.receitaIdParaEditar]);
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar receita', err);
+          this.notificationService.show('Falha ao atualizar receita.', 'error');
+        }
+      });
 
-  } else {
+    } else {
+      
+      
+      const ingredientesCreate = this.ingredientesDaReceita.map(linha => ({
+        ingrediente: { id: linha.ingredienteId },
+        quantidade: linha.quantidade,
+        unidade: linha.unidade
+      }));
 
-    
-    const ingredientesCreate = this.ingredientesDaReceita.map(linha => ({
-      ingrediente: { id: linha.ingredienteId },
-      quantidade: linha.quantidade,
-      unidade: linha.unidade
-    }));
-
-   
-    const dadosCreate = {
-      ...this.receita,
-      modoPreparo: modoPreparoString,
-      ingredientes: ingredientesCreate 
-    };
-
-    this.receitaService.criarReceita(dadosCreate).subscribe({
-      next: (receitaCriada) => {
-        this.notificationService.show('Receita criada com sucesso!', 'success');
-        this.router.navigate(['/receita', receitaCriada.id]);
-      },
-      error: (err) => {
-        console.error('Erro ao criar receita', err);
-        this.notificationService.show('Falha ao criar receita. Verifique os campos.', 'error');
-      }
-    });
+      
+      const dadosCreate = {
+        ...this.receita,
+        modoPreparo: modoPreparoString,
+        ingredientes: ingredientesCreate
+      };
+      
+      
+      formData.append('receita', JSON.stringify(dadosCreate));
+      
+      
+      this.receitaService.criarReceita(formData).subscribe({
+        next: (receitaCriada) => {
+          this.notificationService.show('Receita criada com sucesso!', 'success');
+          this.router.navigate(['/receita', receitaCriada.id]);
+        },
+        error: (err) => {
+          console.error('Erro ao criar receita', err);
+          this.notificationService.show('Falha ao criar receita. Verifique os campos.', 'error');
+        }
+      });
+    }
   }
-}
-
 
   adicionarPasso(): void {
     this.passosDePreparo.push('');
@@ -237,4 +247,18 @@ export class ReceitaNova implements OnInit {
       error: (err) => console.error('Erro ao buscar ingredientes', err)
     });
   }
+
+  onFileSelected(event: any): void {
+      this.imageChangedEvent = event; 
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+      this.croppedImage = event.base64; 
+
+      if (event.blob) {
+        this.imageFile = new File([event.blob], "cropped_image.png", { type: event.blob.type });
+      }
+  }
+
+
 }

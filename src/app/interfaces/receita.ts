@@ -1,9 +1,11 @@
-
+import { SafeStyle } from '@angular/platform-browser';
 
 export interface Receita {
   id: number;
   titulo: string;
   descricao: string;
+  imagemUrl?: string;
+  safeImagemUrl?: SafeStyle;
 }
 
 interface UsuarioDTO {
@@ -31,6 +33,7 @@ export interface ReceitaDetalhe {
   ingredientes: IngredienteDTO[];
   mediaAvaliacoes: number | null;
   informacaoNutricional: InformacaoNutricional | null;
+  imagemUrl?: string;
 }
 
 export interface Comentario {
