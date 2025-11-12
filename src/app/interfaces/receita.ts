@@ -12,6 +12,7 @@ interface UsuarioDTO {
 }
 
 interface IngredienteDTO {
+  ingredienteId: number;
   nomeIngrediente: string;
   quantidade: string;
   unidade: string;

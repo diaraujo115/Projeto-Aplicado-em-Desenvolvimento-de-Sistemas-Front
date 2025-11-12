@@ -41,6 +41,11 @@ export const routes: Routes = [
     component: RecomendarPorIngredientes,
     canActivate: [authGuard]
   },
+  { 
+    path: 'receitas/editar/:id', // :id é o parâmetro da receita
+    component: ReceitaNova, 
+    canActivate: [authGuard] 
+  },
     
 { path: '', redirectTo: '/home', pathMatch: 'full' }
 

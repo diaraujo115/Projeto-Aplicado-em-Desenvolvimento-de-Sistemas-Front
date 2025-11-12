@@ -31,8 +31,12 @@
 
     <div class_alias="receita-list">
 
-      <div *ngIf="receitas.length === 0">
+      <div *ngIf="estaCarregando">
         <p>Carregando receitas...</p>
+      </div>
+
+      <div *ngIf="!estaCarregando && receitas.length === 0">
+        <p>Nenhuma receita encontrada com esses filtros.</p>
       </div>
 
       <div *ngFor="let receita of receitas" class="receita-card">

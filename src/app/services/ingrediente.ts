@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 export interface Ingrediente {
   id: number;
   nome: string;
+  nome_en: string;
 }
 
 @Injectable({

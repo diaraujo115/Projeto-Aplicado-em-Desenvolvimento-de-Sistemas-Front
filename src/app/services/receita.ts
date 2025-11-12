@@ -97,4 +97,16 @@ export class ReceitaService {
 
     return this.http.get<Receita[]>(`${this.apiUrl}/recomendadas`, { params: params });
   }
+
+  deleteReceita(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  updateReceita(id: number, receitaData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, receitaData);
+  }
+
+  getDietasDisponiveis(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/dietas`);
+  }
 }

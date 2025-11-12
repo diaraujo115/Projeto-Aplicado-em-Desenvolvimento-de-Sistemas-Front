@@ -24,10 +24,22 @@
     <ng-template #showMinhasReceitas>
       <div class="card-list">
         <div *ngFor="let receita of minhasReceitas" class="receita-card">
-          <h3>{{ receita.titulo }}</h3>
-          <p>{{ receita.descricao }}</p>
-          <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
-        </div>
+  <h3>{{ receita.titulo }}</h3>
+  <p>{{ receita.descricao }}</p>
+
+  <div class="card-actions">
+    <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver</a>
+
+    <a [routerLink]="['/receitas/editar', receita.id]" class="btn-editar">
+      Editar
+    </a>
+
+    <button (click)="onDeletarReceita(receita.id)" class="btn-deletar">
+      Deletar
+    </button>
+  </div>
+
+</div>
       </div>
     </ng-template>
   </section>

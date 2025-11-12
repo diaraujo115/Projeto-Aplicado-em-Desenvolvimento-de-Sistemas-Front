@@ -20,6 +20,7 @@ export class Home implements OnInit{
   public receitas: Receita[] = [];
   filtroCategoria: string = '';
   filtroDieta: string = '';
+  estaCarregando: boolean = false;
 
   categoriasDisponiveis: string[] = ["Sobremesa",
     "Prato Principal",
@@ -28,12 +29,7 @@ export class Home implements OnInit{
     "Bebida",
     "Salada",
     "Sopa"]; 
-  dietasDisponiveis: string[] = [
-    "Vegetariana",
-    "Vegana",
-    "Sem Glúten",
-    "Sem Lactose",
-    "Low Carb"]; 
+  dietasDisponiveis: string[] = [];
 
   constructor(
     private authService: Auth,private receitaService: ReceitaService , private notificationService: NotificationService) {}
@@ -41,16 +37,22 @@ export class Home implements OnInit{
 
     ngOnInit(): void {
     this.aplicarFiltros();
+    this.carregarFiltrosDeDieta();
   }
 
   carregarReceitas(filtros?: FiltrosReceita): void {
+    this.estaCarregando = true;
     this.receitaService.getReceitas(filtros).subscribe({
       next: (response) => {
         this.receitas = response;
+        this.estaCarregando = false;
         console.log('Receitas carregadas:', this.receitas);
       },
       error: (err) => { 
-        this.notificationService.show('Não foi possível retornar as receitas!', 'error'); }
+        this.notificationService.show('Não foi possível retornar as receitas!', 'error'); 
+      this.estaCarregando = false;
+    }
+        
     });
   }
   
@@ -74,5 +76,15 @@ export class Home implements OnInit{
     this.filtroCategoria = '';
     this.filtroDieta = '';
     this.aplicarFiltros();
+  }
+
+  carregarFiltrosDeDieta(): void {
+    this.receitaService.getDietasDisponiveis().subscribe({
+      next: (data) => {
+        
+        this.dietasDisponiveis = data.sort();
+      },
+      error: (err) => console.error('Erro ao carregar filtros de dieta', err)
+    });
   }
 }

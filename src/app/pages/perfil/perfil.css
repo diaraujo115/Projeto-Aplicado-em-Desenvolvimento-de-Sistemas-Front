@@ -32,7 +32,7 @@ section h3 {
   /* Botão principal de editar */
   background-color: var(--cor-primaria);
   color: var(--cor-branco);
-  text-align: center;
+  
 }
 .configuracoes .btn-editar:hover {
   background-color: #e69500;
@@ -162,4 +162,37 @@ section h3 {
     flex-basis: 30%;
     min-width: 200px; /* Largura mínima */
   }
+}
+
+.receita-card .card-actions {
+  margin-top: auto; /* Empurra os botões para o final do card */
+  padding-top: 15px; /* Espaço acima dos botões */
+  display: flex;
+  flex-wrap: wrap; /* Permite quebra de linha se não houver espaço */
+  gap: 10px; /* Espaço entre os botões */
+}
+
+.receita-card .card-actions a,
+.receita-card .card-actions button {
+  
+  margin: 0; 
+  padding: 8px 12px;
+  font-size: 0.9em;
+}
+
+.card-actions .btn-editar {
+  background-color: var(--cor-primaria); /* Laranja */
+  color: white;
+  border-radius: 5px;
+  
+}
+.card-actions .btn-editar:hover {
+  background-color: #e69500;
+}
+
+.card-actions .btn-deletar {
+  background-color: #dc3545; /* Vermelho */
+}
+.card-actions .btn-deletar:hover {
+  background-color: #c82333;
 }

@@ -1,6 +1,6 @@
 <div class="container form-container">
-  <a routerLink="/home" class="btn-voltar">← Voltar para Home</a>
-  <h2>Criar Nova Receita</h2>
+  <a routerLink="/home" class="btn-voltar">← Voltar</a>
+  <h2>{{ tituloDaPagina }}</h2> 
 
   <form (ngSubmit)="onSubmit()" #receitaForm="ngForm">
 
@@ -23,7 +23,6 @@
             </option>
           </select>
         </div>
-        
       </div>
     </div>
 
@@ -48,8 +47,12 @@
 
         <div class="form-group ingrediente-unidade">
           <label for="unidade-{{i}}">Unidade:</label>
-          <input type="text" id="unidade-{{i}}" name="unidade-{{i}}" [(ngModel)]="ingrediente.unidade" required placeholder="Ex: gramas, xícara">
-        </div>
+          <select id="unidade-{{i}}" name="unidade-{{i}}" [(ngModel)]="ingrediente.unidade" required>
+              <option *ngFor="let un of unidadesDisponiveis" [value]="un">
+                {{ un }}
+              </option>
+            </select>        
+          </div>
 
         <button type="button" (click)="removerLinhaIngrediente(i)" class="btn-remover-linha" title="Remover Ingrediente">X</button>
       </div>
@@ -58,34 +61,34 @@
     </div>
 
     <div class="form-section">
-  <h3>Modo de Preparo</h3>
-
-  <div *ngFor="let passo of passosDePreparo; let i = index; trackBy: trackByIndex" class="passo-linha">
-    
-    <div class="form-group">
-      <label for="passo-{{i}}">Passo {{ i + 1 }}:</label>
+      <h3>Modo de Preparo</h3>
+      <div *ngFor="let passo of passosDePreparo; let i = index; trackBy: trackByIndex" class="passo-linha">
+        <div class="form-group">
+          <label for="passo-{{i}}">Passo {{ i + 1 }}:</label>
+          <textarea id="passo-{{i}}" name="passo-{{i}}" 
+                    [(ngModel)]="passosDePreparo[i]" 
+                    rows="3" 
+                    required 
+                    placeholder="Descreva este passo...">
+          </textarea>
+        </div>
+        
+        <button type="button" (click)="removerPasso(i)" 
+                class="btn-remover-linha" 
+                title="Remover Passo" 
+                *ngIf="passosDePreparo.length > 1">
+          X
+        </button>
+      </div>
       
-      <textarea id="passo-{{i}}" name="passo-{{i}}" 
-                [(ngModel)]="passosDePreparo[i]" 
-                rows="3" 
-                required 
-                placeholder="Descreva este passo...">
-      </textarea>
+      <button type="button" (click)="adicionarPasso()" class="btn-adicionar-linha">
+        + Adicionar Passo
+      </button>
     </div>
-    
-    <button type="button" (click)="removerPasso(i)" 
-            class="btn-remover-linha" 
-            title="Remover Passo" 
-            *ngIf="passosDePreparo.length > 1">
-      X
-    </button>
-  </div>
-  
-  <button type="button" (click)="adicionarPasso()" class="btn-adicionar-linha">
-    + Adicionar Passo
-  </button>
-</div>
 
-    <button type="submit" class="btn-salvar-receita" [disabled]="!receitaForm.form.valid">Salvar Receita</button>
-  </form>
-</div>
+    <button type="submit" class="btn-salvar-receita" [disabled]="!receitaForm.form.valid">
+      {{ isEditMode ? 'Salvar Alterações' : 'Salvar Receita' }}
+    </button>
+    
+  </form> </div> 
+
