@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router'; // Importar ActivatedRoute
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ReceitaService } from '../../services/receita';
 import { ReceitaDetalhe, Comentario } from '../../interfaces/receita';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,8 @@ export class ReceitaDetalheComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private receitaService: ReceitaService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -185,6 +186,10 @@ export class ReceitaDetalheComponent implements OnInit {
         }
       });
     }
+  }
+
+  voltar(): void {
+    this.location.back(); // Isso navega de volta para a página anterior no histórico
   }
 
 }

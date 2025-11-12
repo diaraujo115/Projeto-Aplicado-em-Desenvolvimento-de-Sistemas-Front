@@ -1,5 +1,5 @@
 <div class="detalhe-container container">
-  <a routerLink="/home" class="btn-voltar">← Voltar para a lista</a>
+  <button (click)="voltar()" class="btn-voltar">← Voltar para a lista</button>
 
   <div *ngIf="!receita; else showReceita">
     <p>Carregando detalhes da receita...</p>

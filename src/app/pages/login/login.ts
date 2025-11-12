@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Importar
-import { CommonModule } from '@angular/common'; // Importar
+import { FormsModule } from '@angular/forms'; 
+import { CommonModule } from '@angular/common'; 
 import { Auth } from '../../services/auth';
 import { Router, RouterLink } from '@angular/router';
 import { NotificationService } from '../../services/notification';
