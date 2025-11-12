@@ -17,16 +17,16 @@ import { NotificationService } from '../../services/notification';
 export class ReceitaDetalheComponent implements OnInit {
 
   receita: ReceitaDetalhe | null = null;
-  comentarios: Comentario[] = []; //  Variável para guardar os comentários
-  novoComentarioTexto: string = ''; //  Variável para o campo de novo comentário
-  receitaId: number | null = null; // Para guardar o ID da receita
-  notaSelecionada: number = 0; // Para guardar a nota que o usuário clica
+  comentarios: Comentario[] = []; 
+  novoComentarioTexto: string = ''; 
+  receitaId: number | null = null; 
+  notaSelecionada: number = 0; 
   hoverNota: number = 0;
   minhaNotaSalva: number = 0;
-  receitaEstaSalva: boolean = false; // Guarda o estado atual
+  receitaEstaSalva: boolean = false; 
 
   constructor(
-    private route: ActivatedRoute, // Para ler a URL
+    private route: ActivatedRoute, 
     private receitaService: ReceitaService,
     private notificationService: NotificationService
   ) {}
@@ -35,9 +35,8 @@ export class ReceitaDetalheComponent implements OnInit {
     const idParam = this.route.snapshot.paramMap.get('id');
 
     if (idParam) {
-      this.receitaId = +idParam; // Guarda o ID
+      this.receitaId = +idParam; 
 
-      // Busca os detalhes da receita
       this.receitaService.getReceitaPorId(this.receitaId).subscribe({
         next: (response) => { this.receita = response; },
         error: (err) => { 
@@ -48,8 +47,7 @@ export class ReceitaDetalheComponent implements OnInit {
 
       this.buscarDetalhesReceita();
 
-      // Busca os comentários da receita
-      this.carregarComentarios(); // Chama a nova função
+      this.carregarComentarios(); 
 
       this.carregarMinhaClassificacao();
 
@@ -57,7 +55,6 @@ export class ReceitaDetalheComponent implements OnInit {
     }
   }
 
-  // 6. Função para carregar comentários
   carregarComentarios(): void {
     if (this.receitaId) {
       this.receitaService.getComentarios(this.receitaId).subscribe({
@@ -71,16 +68,14 @@ export class ReceitaDetalheComponent implements OnInit {
     }
   }
 
-  // 7. Função para adicionar um novo comentário
   adicionarComentario(): void {
     if (this.novoComentarioTexto.trim() && this.receitaId) {
       this.receitaService.adicionarComentario(this.receitaId, this.novoComentarioTexto).subscribe({
         next: (novoComentarioAdicionado) => {
           this.notificationService.show('Comentário adicionado!', 'success')
           console.log('Comentário adicionado:', novoComentarioAdicionado);
-          // Adiciona o novo comentário à lista exibida na tela
           this.comentarios.push(novoComentarioAdicionado);
-          this.novoComentarioTexto = ''; // Limpa o campo
+          this.novoComentarioTexto = ''; 
         },
         error: (err) => {
           console.error('Erro ao adicionar comentário', err);
@@ -111,18 +106,15 @@ export class ReceitaDetalheComponent implements OnInit {
     }
   }
 
-  // Funções auxiliares para o efeito das estrelas
   setHoverNota(nota: number): void {
     this.hoverNota = nota;
   }
 
   setNota(nota: number): void {
     this.notaSelecionada = nota;
-    // Poderia chamar this.classificar() diretamente aqui se quisesse
-    // que o clique já enviasse a nota, mas vamos manter um botão por clareza.
+    
   }
 
-  // Função para buscar os detalhes (reutilizável)
   buscarDetalhesReceita(): void {
       if(this.receitaId) {
           this.receitaService.getReceitaPorId(this.receitaId).subscribe({
@@ -139,13 +131,11 @@ export class ReceitaDetalheComponent implements OnInit {
     if (this.receitaId) {
       this.receitaService.getMinhaClassificacao(this.receitaId).subscribe({
         next: (response) => {
-          // Se encontrar, atualiza a nota salva e a selecionada
           this.minhaNotaSalva = response.nota;
-          this.notaSelecionada = response.nota; // Pré-seleciona as estrelas
+          this.notaSelecionada = response.nota; 
           console.log('Minha classificação carregada:', this.minhaNotaSalva);
         },
         error: (err) => {
-          // Se der erro (ex: 404 Not Found), significa que o usuário não avaliou ainda
           this.minhaNotaSalva = 0;
           this.notaSelecionada = 0;
           
@@ -162,7 +152,6 @@ export class ReceitaDetalheComponent implements OnInit {
           console.log('Status salvo carregado:', this.receitaEstaSalva);
         },
         error: (err) => {
-          // Assume como false se der erro (ex: 404 se is-salva não for encontrado)
           this.receitaEstaSalva = false;
           console.error('Erro ao verificar status salvo', err);
         }
@@ -170,16 +159,13 @@ export class ReceitaDetalheComponent implements OnInit {
     }
   }
 
-  // Função chamada pelo botão para alternar o estado salvo
   toggleSalvarReceita(): void {
     if (!this.receitaId) return;
 
     if (this.receitaEstaSalva) {
-      // Se está salva, remove
       this.receitaService.removerReceitaSalva(this.receitaId).subscribe({
         next: () => {
           this.receitaEstaSalva = false;
-          //alert('Receita removida dos seus favoritos!');
           this.notificationService.show('Receita removida dos seus favoritos!', 'success')
         },
         error: (err) => {
@@ -188,7 +174,6 @@ export class ReceitaDetalheComponent implements OnInit {
         }
       });
     } else {
-      // Se não está salva, salva
       this.receitaService.salvarReceita(this.receitaId).subscribe({
         next: () => {
           this.receitaEstaSalva = true;

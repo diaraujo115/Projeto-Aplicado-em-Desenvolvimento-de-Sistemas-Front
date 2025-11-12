@@ -19,7 +19,6 @@ export class Cadastro{
     senha: ''
   };
 
-  // Injetar o Router
   constructor(private authService: Auth, private router: Router, private notificationService: NotificationService) {}
 
   onSubmit(): void {

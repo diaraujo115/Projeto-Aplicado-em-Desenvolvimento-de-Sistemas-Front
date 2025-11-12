@@ -40,15 +40,15 @@ h2 {
   flex: 1;
 }
 
-/* Layout da Linha de Ingrediente */
+
 .ingrediente-linha {
   display: flex;
   gap: 15px;
-  align-items: flex-end; /* Alinha os campos na base */
+  align-items: flex-end;
   margin-bottom: 15px;
 }
 
-.ingrediente-nome { flex: 3; } /* Ingrediente ocupa mais espaço */
+.ingrediente-nome { flex: 3; } 
 .ingrediente-qtd { flex: 1; }
 .ingrediente-unidade { flex: 2; }
 
@@ -62,13 +62,13 @@ h2 {
   font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 22px; /* Alinha com os inputs */
+  margin-bottom: 22px; 
   flex-shrink: 0;
   display: flex;
-  align-items: center;      /* Centraliza verticalmente */
-  justify-content: center;  /* Centraliza horizontalmente */
+  align-items: center;      
+  justify-content: center;  
   padding: 0;
-  line-height: 1; /* Força a altura da linha do texto */
+  line-height: 1;
   box-sizing: border-box;
 }
 
@@ -78,7 +78,7 @@ h2 {
 }
 
 .btn-adicionar-linha {
-  background-color: #28a745; /* Verde */
+  background-color: #28a745; 
   color: white;
   border: none;
   padding: 10px 15px;
@@ -107,7 +107,7 @@ h2 {
   flex-grow: 1; 
 }
 
-/* O botão de remover usa o mesmo estilo da linha de ingrediente */
+
 .passo-linha .btn-remover-linha {
-  margin-top: 30px; /* Alinha o botão com o textarea */
+  margin-top: 30px; 
 }

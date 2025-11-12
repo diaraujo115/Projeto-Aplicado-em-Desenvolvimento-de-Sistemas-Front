@@ -6,6 +6,7 @@ import { ReceitaService, FiltrosReceita } from '../../services/receita';
 import { Receita } from '../../interfaces/receita';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NotificationService } from '../../services/notification';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,6 @@ export class Home implements OnInit{
   filtroCategoria: string = '';
   filtroDieta: string = '';
 
-  // (Opcional) Listas para preencher os dropdowns
   categoriasDisponiveis: string[] = ["Sobremesa",
     "Prato Principal",
     "Lanche",
@@ -36,7 +36,7 @@ export class Home implements OnInit{
     "Low Carb"]; 
 
   constructor(
-    private authService: Auth,private receitaService: ReceitaService ) {}
+    private authService: Auth,private receitaService: ReceitaService , private notificationService: NotificationService) {}
 
 
     ngOnInit(): void {
@@ -49,7 +49,8 @@ export class Home implements OnInit{
         this.receitas = response;
         console.log('Receitas carregadas:', this.receitas);
       },
-      error: (err) => { /* ... (tratamento de erro existente) ... */ }
+      error: (err) => { 
+        this.notificationService.show('Não foi possível retornar as receitas!', 'error'); }
     });
   }
   
@@ -68,8 +69,7 @@ export class Home implements OnInit{
     this.carregarReceitas(filtros);
   }
 
-  // === NOVO MÉTODO ===
-  // Limpa os filtros e recarrega todas as receitas
+  
   limparFiltros(): void {
     this.filtroCategoria = '';
     this.filtroDieta = '';

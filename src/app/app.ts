@@ -1,8 +1,7 @@
-// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importante para *ngIf
-import { RouterOutlet, RouterLink, Router, NavigationEnd} from '@angular/router'; // Importante para <router-outlet>
-import { FormsModule } from '@angular/forms'; // Importante para [(ngModel)]
+import { CommonModule } from '@angular/common'; 
+import { RouterOutlet, RouterLink, Router, NavigationEnd} from '@angular/router'; 
+import { FormsModule } from '@angular/forms'; 
 import { Auth } from './services/auth';
 import { NotificationComponent } from './components/notification/notification';
 import { filter } from 'rxjs/operators';
@@ -38,7 +37,6 @@ export class App {
   }
 
 
-  // Método que será chamado pelo HTML
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }

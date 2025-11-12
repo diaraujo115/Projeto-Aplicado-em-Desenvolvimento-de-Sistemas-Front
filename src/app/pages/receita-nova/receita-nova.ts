@@ -1,4 +1,4 @@
-// src/app/pages/receita-nova/receita-nova.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
@@ -128,7 +128,6 @@ export class ReceitaNova implements OnInit {
     }
   }
 
-  // Permite que o *ngFor funcione corretamente ao editar os campos
   trackByIndex(index: number, obj: any): any {
     return index;
   }

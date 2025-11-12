@@ -6,7 +6,6 @@ export interface Receita {
   descricao: string;
 }
 
-
 interface UsuarioDTO {
   id: number;
   nome: string;
@@ -26,7 +25,7 @@ export interface ReceitaDetalhe {
   modoPreparo: string;
   categoria: string;
   dieta: string;
-  dataCriacao: string; // O Angular pode converter a string de data
+  dataCriacao: string; 
   usuario: UsuarioDTO;
   ingredientes: IngredienteDTO[];
   mediaAvaliacoes: number | null;

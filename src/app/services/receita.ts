@@ -88,4 +88,13 @@ export class ReceitaService {
   criarReceita(receitaData: any): Observable<ReceitaDetalhe> {
     return this.http.post<ReceitaDetalhe>(this.apiUrl, receitaData);
   }
+
+  recomendarPorIngredientes(ids: number[]): Observable<Receita[]> {
+    let params = new HttpParams();
+    ids.forEach(id => {
+      params = params.append('ingredientes', id.toString());
+    });
+
+    return this.http.get<Receita[]>(`${this.apiUrl}/recomendadas`, { params: params });
+  }
 }

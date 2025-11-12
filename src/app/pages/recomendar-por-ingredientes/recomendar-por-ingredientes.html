@@ -1,0 +1,73 @@
+<div class="container recomendar-container">
+  <h1>O que tenho na despensa?</h1>
+  <p>Selecione os ingredientes que você tem em casa e clique em buscar.</p>
+
+  <section class="selecao-ingredientes">
+  <div class="layout-selecao">
+    
+    <div class="painel-busca">
+      <label for="busca-ingrediente">Selecione um Ingrediente:</label>
+      
+      <input 
+        type="text" 
+        id="busca-ingrediente"
+        class="input-datalist"
+        placeholder="Digite ou selecione na lista..."
+        [(ngModel)]="termoBusca"
+        (input)="onIngredienteInput()" 
+        list="lista-de-ingredientes">
+        
+      <datalist id="lista-de-ingredientes">
+        <option *ngFor="let ing of listaTodosIngredientes" [value]="ing.nome">
+          </option>
+      </datalist>
+      
+    </div>
+    
+    <div class="painel-selecionados">
+      <div class="header-selecionados">
+        <strong>Ingredientes Selecionados ({{ listaSelecionada.length }})</strong>
+        <button (click)="limparSelecao()" class="btn-limpar" *ngIf="listaSelecionada.length > 0">
+          Limpar Seleção
+        </button>
+      </div>
+      
+      <div *ngIf="listaSelecionada.length === 0" class="placeholder-selecionados">
+        Nenhum ingrediente selecionado.
+      </div>
+      
+      <ul class="lista-itens-selecionados">
+        <li *ngFor="let ing of listaSelecionada" class="item-selecionado">
+          <span>{{ ing.nome }}</span>
+          <button (click)="removerIngrediente(ing)" class="btn-remover-item">X</button>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+  
+  <button (click)="buscarReceitas()" class="btn-buscar" [disabled]="estaCarregando || listaSelecionada.length === 0">
+    {{ estaCarregando ? 'Buscando...' : 'Buscar Receitas' }}
+  </button>
+</section>
+
+  <section class="resultados-recomendacao">
+    <h2>Receitas Recomendadas</h2>
+    
+    <div *ngIf="estaCarregando">
+      <p>Buscando...</p>
+    </div>
+
+    <div *ngIf="!estaCarregando && buscou && receitasRecomendadas.length === 0">
+      <p>Nenhuma receita encontrada com os ingredientes selecionados.</p>
+    </div>
+
+    <div *ngIf="!estaCarregando && receitasRecomendadas.length > 0" class="card-list">
+      <div *ngFor="let receita of receitasRecomendadas" class="receita-card">
+        <h3>{{ receita.titulo }}</h3>
+        <p>{{ receita.descricao }}</p>
+        <a [routerLink]="['/receita', receita.id]" class="btn-detalhes">Ver Detalhes</a>
+      </div>
+    </div>
+  </section>
+</div>

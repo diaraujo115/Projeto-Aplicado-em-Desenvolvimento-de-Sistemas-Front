@@ -1,0 +1,167 @@
+/* src/app/pages/recomendar-por-ingredientes/recomendar-por-ingredientes.component.css */
+
+h1 {
+  border-bottom: 2px solid var(--cor-primaria);
+  padding-bottom: 10px;
+}
+
+section {
+  background-color: var(--cor-branco);
+  padding: 20px 25px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--cor-borda);
+}
+
+section h2,
+section h3 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 10px;
+}
+
+.layout-selecao {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.painel-busca {
+  flex: 1; 
+  position: relative;
+}
+
+.painel-busca label {
+  font-weight: 500;
+  color: var(--cor-texto-claro);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.painel-busca .input-datalist {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+
+.painel-selecionados {
+  flex: 1; 
+  border: 1px solid var(--cor-borda);
+  border-radius: 5px;
+  background-color: #fdfdfd;
+  min-height: 200px;
+}
+
+.header-selecionados {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--cor-borda);
+  background-color: #f9f9f9;
+}
+
+.btn-limpar {
+  background: none;
+  border: none;
+  color: var(--cor-primaria);
+  cursor: pointer;
+  font-size: 0.9em;
+  padding: 5px;
+}
+.btn-limpar:hover {
+  text-decoration: underline;
+}
+
+.placeholder-selecionados {
+  padding: 15px;
+  color: var(--cor-texto-claro);
+  font-style: italic;
+}
+
+.lista-itens-selecionados {
+  list-style: none;
+  padding: 15px;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.item-selecionado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--cor-borda);
+}
+.item-selecionado:last-child {
+  border-bottom: none;
+}
+
+.btn-remover-item {
+  background-color: var(--cor-secundaria);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  font-size: 0.9em;
+}
+.btn-remover-item:hover {
+  background-color: #c82333;
+}
+
+.btn-buscar {
+  font-size: 1.1em;
+  width: 100%;
+  padding: 12px;
+}
+
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+.receita-card {
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--cor-branco);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+.receita-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+.receita-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--cor-primaria);
+  font-size: 1.3em;
+  border: none;
+  padding: 0;
+}
+.receita-card p {
+  font-size: 0.95em;
+  color: var(--cor-texto-claro);
+  margin-bottom: auto;
+  padding-bottom: 15px;
+}
+.receita-card .btn-detalhes {
+  margin-top: 15px;
+  align-self: flex-start;
+}

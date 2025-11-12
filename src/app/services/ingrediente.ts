@@ -16,7 +16,6 @@ export class IngredienteService {
 
   constructor(private http: HttpClient) { }
 
-  // Busca todos os ingredientes do banco (para o dropdown)
   getIngredientes(): Observable<Ingrediente[]> {
     return this.http.get<Ingrediente[]>(this.apiUrl);
   }

@@ -60,13 +60,13 @@
     </section>
 
     <section class="tags-dieta" *ngIf="receita?.dieta && receita?.dieta !== 'Nenhuma'">
-  <h3>Tags da Receita</h3>
-  <div class="tag-lista">
-    <span *ngFor="let tag of receita?.dieta?.split(', ')" class="tag-item">
-      {{ tag }}
-    </span>
-  </div>
-</section>
+      <h3>Tags da Receita</h3>
+      <div class="tag-lista">
+        <span *ngFor="let tag of receita?.dieta?.split(', ')" class="tag-item">
+          {{ tag }}
+        </span>
+      </div>
+    </section>
 
     <section class="nutricional" *ngIf="receita?.informacaoNutricional">
         <h3>Informações Nutricionais (Total)</h3>
