@@ -84,11 +84,7 @@
     color: var(--cor-branco);
     border-color: var(--cor-secundaria);
 }
-/* Adapte o texto ou use um ícone (ex: Font Awesome) para o botão salvar */
-/* Ex: <button (click)="toggleSalvarReceita()"> <i [class]="receitaEstaSalva ? 'fas fa-heart' : 'far fa-heart'"></i> </button> */
 
-
-/* Seções */
 .classificacao, .descricao, .ingredientes, .modo-preparo, .comentarios {
   margin-top: 35px;
 }
@@ -157,6 +153,15 @@
   padding: 15px 20px;
   margin-bottom: 15px;
   border-radius: 5px;
+  position: relative;
+}
+
+.comentario-acoes {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px; 
 }
 
 .comentario-card p { margin: 5px 0; }
@@ -242,4 +247,115 @@
   font-size: 0.9em;
   font-style: italic;
   border-radius: 8px;
+}
+
+.comentario-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start;
+}
+
+btn-editar-comentario {
+  color: var(--cor-primaria);
+}
+.btn-editar-comentario:hover {
+  background-color: #e0e0ff; /* Laranja claro */
+}
+
+.btn-deletar-comentario {
+  color: var(--cor-secundaria);
+}
+.btn-deletar-comentario:hover {
+  background-color: #ff0000; /* Vermelho claro */
+}
+
+.comentario-edit-mode p {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--cor-texto-claro);
+  margin: 0 0 5px 0;
+}
+.edit-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-primaria); /* Destaque laranja */
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+  resize: vertical;
+  min-height: 80px;
+}
+.edit-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
+}
+
+.btn-cancelar-edit {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-salvar-edit {
+  background-color: #28a745; /* Verde Sucesso */
+  color: white;
+}
+.btn-salvar-edit:hover {
+  background-color: #218838;
+}
+
+.btn-cancelar-edit {
+  background-color: var(--cor-texto-claro);
+  color: white;
+}
+.btn-cancelar-edit:hover {
+  background-color: #5a6268;
+}
+
+.comentario-confirm-delete {
+  background-color: #fff6f6;
+  border: 1px solid var(--cor-secundaria, #FF6347);
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-top: 10px; /* Adiciona espaço acima */
+  display: flex;
+  
+  align-items: center;
+}
+
+.comentario-confirm-delete p {
+  margin: 0;
+  font-weight: 500;
+  color: #58151c;
+  font-size: 0.9em;
+}
+
+.comentario-confirm-delete .btn-confirmar-sim,
+.comentario-confirm-delete .btn-cancelar {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  color: white;
+}
+
+.comentario-confirm-delete .btn-confirmar-sim {
+  background-color: var(--cor-secundaria, #FF6347);
+}
+.comentario-confirm-delete .btn-confirmar-sim:hover {
+  background-color: #c82333;
+}
+
+.comentario-confirm-delete .btn-cancelar {
+  background-color: var(--cor-texto-claro, #6c757d);
+}
+.comentario-confirm-delete .btn-cancelar:hover {
+  background-color: #5a6268;
 }

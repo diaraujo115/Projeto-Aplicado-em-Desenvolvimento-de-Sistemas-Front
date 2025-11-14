@@ -44,6 +44,9 @@ export interface Comentario {
     id: number;
     nome: string;
   };
+  isEditing?: boolean; 
+  editText?: string;
+  isDeleting?: boolean;
 }
 
 export interface InformacaoNutricional {

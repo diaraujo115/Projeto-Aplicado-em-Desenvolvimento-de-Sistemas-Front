@@ -6,6 +6,7 @@ import { ReceitaService } from '../../services/receita';
 import { ReceitaDetalhe, Comentario } from '../../interfaces/receita';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification';
+import { Usuario } from '../../services/usuario';
 
 @Component({
   selector: 'app-receita-detalhe',
@@ -24,10 +25,12 @@ export class ReceitaDetalheComponent implements OnInit {
   hoverNota: number = 0;
   minhaNotaSalva: number = 0;
   receitaEstaSalva: boolean = false; 
+  public usuarioLogadoId: number | null = null;
 
   constructor(
     private route: ActivatedRoute, 
     private receitaService: ReceitaService,
+    private usuarioService: Usuario,
     private notificationService: NotificationService,
     private location: Location
   ) {}
@@ -54,17 +57,28 @@ export class ReceitaDetalheComponent implements OnInit {
 
       this.carregarStatusSalvo();
     }
+
+    this.usuarioService.getMeuPerfil().subscribe({
+      next: (perfil) => {
+        this.usuarioLogadoId = perfil.id;
+      },
+      error: (err) => console.error('Erro ao buscar perfil do usuário', err)
+    });
+
   }
 
   carregarComentarios(): void {
     if (this.receitaId) {
       this.receitaService.getComentarios(this.receitaId).subscribe({
-        next: (response) => { this.comentarios = response; },
-        error: (err) => { 
-          console.error('Erro ao carregar comentários', err);
-          this.notificationService.show('Erro ao carregar comentários', 'error')
-        
-        }
+        next: (response) => {
+          this.comentarios = response.map(comentario => ({
+            ...comentario,
+            isEditing: false,
+            editText: comentario.texto,
+            isDeleting: false
+          }));
+        },
+        error: (err) => { console.error('Erro ao carregar comentários', err); }
       });
     }
   }
@@ -73,14 +87,17 @@ export class ReceitaDetalheComponent implements OnInit {
     if (this.novoComentarioTexto.trim() && this.receitaId) {
       this.receitaService.adicionarComentario(this.receitaId, this.novoComentarioTexto).subscribe({
         next: (novoComentarioAdicionado) => {
-          this.notificationService.show('Comentário adicionado!', 'success')
-          console.log('Comentário adicionado:', novoComentarioAdicionado);
-          this.comentarios.push(novoComentarioAdicionado);
+          this.comentarios.push({
+            ...novoComentarioAdicionado,
+            isEditing: false,
+            editText: novoComentarioAdicionado.texto,
+            isDeleting: false
+          });
           this.novoComentarioTexto = ''; 
+          this.notificationService.show('Comentário adicionado!', 'success');
         },
         error: (err) => {
-          console.error('Erro ao adicionar comentário', err);
-          alert('Não foi possível adicionar o comentário. Tente novamente.');
+          this.notificationService.show('Erro, Comentário não adicionado!', 'error');
         }
       });
     }
@@ -192,4 +209,53 @@ export class ReceitaDetalheComponent implements OnInit {
     this.location.back(); // Isso navega de volta para a página anterior no histórico
   }
 
+  onEditComentario(comentario: Comentario): void {
+    comentario.editText = comentario.texto;
+    comentario.isEditing = true;
+  }
+
+  confirmarDelete(comentario: Comentario): void {
+    
+    this.receitaService.deleteComentario(comentario.id).subscribe({
+      next: () => {
+        this.comentarios = this.comentarios.filter(c => c.id !== comentario.id);
+        this.notificationService.show('Comentário deletado!', 'success');
+        
+      },
+      error: (err) => {
+        this.notificationService.show('Erro ao deletar comentário.', 'error');
+        
+        comentario.isDeleting = false;
+      }
+    });
+  }
+
+  onSaveEdit(comentario: Comentario): void {
+    if (comentario.editText && comentario.editText.trim() && comentario.id) {
+      this.receitaService.updateComentario(comentario.id, comentario.editText).subscribe({
+        next: (comentarioAtualizado) => {
+          
+          comentario.texto = comentarioAtualizado.texto;
+          
+          comentario.isEditing = false;
+          this.notificationService.show('Comentário atualizado!', 'success');
+        },
+        error: (err) => this.notificationService.show('Erro ao atualizar comentário.', 'error')
+      });
+    }
+  }
+
+  onCancelEdit(comentario: Comentario): void {
+    comentario.isEditing = false;
+    
+  }
+
+  iniciarConfirmacaoDelete(comentario: Comentario): void {
+    comentario.isDeleting = true;
+  }
+  
+  
+  cancelarDelete(comentario: Comentario): void {
+    comentario.isDeleting = false;
+  }
 }

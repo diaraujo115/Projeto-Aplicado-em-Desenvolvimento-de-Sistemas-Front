@@ -94,28 +94,56 @@
     </section>
 
     <section class="comentarios">
-  <h3>Comentários</h3>
-<div *ngIf="comentarios.length === 0">
-      <p>Seja o primeiro a comentar!</p>
-    </div>
-  <div class="novo-comentario">
-    <textarea 
-      [(ngModel)]="novoComentarioTexto" 
-      placeholder="Escreva seu comentário aqui..."
-      rows="5"></textarea>
-    <button (click)="adicionarComentario()" [disabled]="!novoComentarioTexto.trim()">
-      Comentar
-    </button>
-  </div>
+      <h3>Comentários</h3>
+      <div *ngIf="comentarios.length === 0">
+            <p>Seja o primeiro a comentar!</p>
+      </div>
+        <div class="novo-comentario">
+          <textarea 
+            [(ngModel)]="novoComentarioTexto" 
+            placeholder="Escreva seu comentário aqui..."
+            rows="5"></textarea>
+          <button (click)="adicionarComentario()" [disabled]="!novoComentarioTexto.trim()">
+            Comentar
+          </button>
+        </div>
 
-  <div class="lista-comentarios">
-    
+      <div class="lista-comentarios">
+          <div *ngFor="let comentario of comentarios" class="comentario-card">
 
-    <div *ngFor="let comentario of comentarios" class="comentario-card">
-      <p><strong>{{ comentario.usuario.nome }}</strong> <span> em {{ comentario.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</span></p>
-      <p>{{ comentario.texto }}</p>
+    <div *ngIf="!comentario.isEditing">
+      <div class="comentario-header">
+        <p><strong>{{ comentario.usuario.nome }}</strong> <span>em {{ comentario.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</span></p>
+        
+        <div class="comentario-acoes" *ngIf="comentario.usuario.id === usuarioLogadoId">
+      
+      <div *ngIf="!comentario.isDeleting">
+        <button (click)="onEditComentario(comentario)" class="btn-editar-comentario">Editar</button>
+        <button (click)="iniciarConfirmacaoDelete(comentario)" class="btn-deletar-comentario">Deletar</button>
+      </div>
+
     </div>
+      </div>
+
+      <div class="comentario-confirm-delete" *ngIf="comentario.isDeleting">
+    <p>Certeza que deseja deletar seu comentário?</p>
+    <button (click)="confirmarDelete(comentario)" class="btn-confirmar-sim">Sim</button>
+    <button (click)="cancelarDelete(comentario)" class="btn-cancelar">Não</button>
   </div>
+      <p class="comentario-texto">{{ comentario.texto }}</p>
+    </div>
+
+    <div *ngIf="comentario.isEditing" class="comentario-edit-mode">
+      <p>Editando seu comentário:</p>
+      <textarea [(ngModel)]="comentario.editText" rows="3" class="edit-textarea"></textarea>
+      <div class="comentario-acoes-edit">
+        <button (click)="onSaveEdit(comentario)" class="btn-salvar-edit">Salvar</button>
+        <button (click)="onCancelEdit(comentario)" class="btn-cancelar-edit">Cancelar</button>
+      </div>
+    </div>
+
+  </div>
+    </div>
 </section>
   </ng-template>
 </div>

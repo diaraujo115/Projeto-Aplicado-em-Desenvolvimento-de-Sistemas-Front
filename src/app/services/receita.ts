@@ -22,6 +22,7 @@ export interface FiltrosReceita {
 })
 export class ReceitaService {
   private apiUrl = 'http://localhost:8080/api/receitas';
+  private comentarioApiUrl = 'http://localhost:8080/api/comentarios';
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +38,6 @@ export class ReceitaService {
     }
     return this.http.get<Receita[]>(this.apiUrl, { params: params });
   }
-
 
 
   getReceitaPorId(id: number): Observable<ReceitaDetalhe> {
@@ -108,5 +108,13 @@ export class ReceitaService {
 
   getDietasDisponiveis(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/dietas`);
+  }
+
+  updateComentario(id: number, texto: string): Observable<Comentario> {
+    return this.http.put<Comentario>(`${this.comentarioApiUrl}/${id}`, { texto: texto });
+  }
+
+  deleteComentario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.comentarioApiUrl}/${id}`);
   }
 }
