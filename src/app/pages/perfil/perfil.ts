@@ -18,6 +18,8 @@ export class Perfil implements OnInit {
   minhasReceitas: Receita[] = [];
   receitasSalvas: Receita[] = [];
 
+  usuario: any = null;
+
   confirmandoDelete: boolean = false;
 
   constructor(
@@ -38,6 +40,8 @@ export class Perfil implements OnInit {
       next: (data) => this.receitasSalvas = data,
       error: (err) => console.error('Erro ao buscar receitas salvas', err)
     });
+
+    this.carregarDadosUsuario();
   }
 
   deletarConta(): void {
@@ -96,5 +100,14 @@ export class Perfil implements OnInit {
         }
       });
     }
+  }
+
+  carregarDadosUsuario(): void {
+    this.usuarioService.getMeuPerfil().subscribe({
+      next: (data) => {
+        this.usuario = data;
+      },
+      error: (err) => console.error('Erro ao carregar perfil', err)
+    });
   }
 }

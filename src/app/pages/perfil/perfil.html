@@ -1,6 +1,16 @@
 <div class="perfil-container container">
   <h1>Minha Conta</h1>
 
+  <div class="perfil-header" *ngIf="usuario">
+    <div class="avatar-circle">
+      {{ usuario.nome.charAt(0).toUpperCase() }}
+    </div>
+    <div class="user-info">
+      <h2>{{ usuario.nome }}</h2>
+      <p>{{ usuario.email }}</p>
+    </div>
+  </div>
+
   <section class="configuracoes">
     <h3>Configurações do Perfil</h3>
     <div>
