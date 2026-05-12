@@ -1,4 +1,4 @@
-# 🍽️ Receitas & Despensa — Front-end
+# 🍽️ Receitas de Despensa — Front-end
 
 Interface web desenvolvida em **Angular** como projeto de conclusão de curso, consumindo a API REST do back-end para oferecer uma experiência completa de descoberta e gestão de receitas.
 
