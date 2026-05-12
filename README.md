@@ -1,59 +1,83 @@
-# ReceitasDespensaFrontend
+# 🍽️ Receitas & Despensa — Front-end
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
+Interface web desenvolvida em **Angular** como projeto de conclusão de curso, consumindo a API REST do back-end para oferecer uma experiência completa de descoberta e gestão de receitas.
 
-## Development server
+> 🔗 Back-end: [Projeto-Aplicado-em-Desenvolvimento-de-Sistemas](https://github.com/diaraujo115/Projeto-Aplicado-em-Desenvolvimento-de-Sistemas)
 
-To start a local development server, run:
+---
+
+## 📋 Funcionalidades
+
+- Listagem, busca e leitura de receitas
+- Visualização da análise nutricional automática de cada receita
+- Filtro de receitas pelos ingredientes disponíveis na sua despensa
+- Avaliação e comentários em receitas
+- Criação de conta de usuário e login
+- Criação e gerenciamento de receitas próprias
+- Favoritar e salvar receitas
+
+---
+
+## 🛠️ Tecnologias
+
+| Camada | Tecnologia |
+|---|---|
+| Framework | Angular 20 |
+| Linguagem | TypeScript |
+| Estilização | CSS |
+| Comunicação com API | HttpClient (Angular) |
+| Autenticação | JWT via interceptors |
+
+---
+
+## 🚀 Como executar localmente
+
+### Pré-requisitos
+
+- Node.js 18+
+- Angular CLI: `npm install -g @angular/cli`
+- [Back-end rodando](https://github.com/diaraujo115/Projeto-Aplicado-em-Desenvolvimento-de-Sistemas) em `http://localhost:8080`
+
+### Passos
 
 ```bash
+# Clone o repositório
+git clone https://github.com/diaraujo115/Projeto-Aplicado-em-Desenvolvimento-de-Sistemas-Front.git
+cd Projeto-Aplicado-em-Desenvolvimento-de-Sistemas-Front
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Acesse em `http://localhost:4200`.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🗂️ Estrutura do Projeto
 
-```bash
-ng generate component component-name
+```
+src/
+└── app/
+    ├── components/    # Componentes reutilizáveis (cards, forms, etc.)
+    ├── pages/         # Páginas da aplicação
+    ├── services/      # Chamadas à API REST
+    ├── models/        # Interfaces TypeScript
+    ├── guards/        # Proteção de rotas autenticadas
+    └── interceptors/  # Injeção automática do token JWT
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🔗 Integração com o Back-end
 
-## Building
+O front-end consome a API REST do back-end Java/Spring Boot. Certifique-se de que o back-end esteja rodando antes de iniciar o front-end. A URL da API pode ser configurada em `src/environments/environment.ts`.
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 👨‍💻 Autor
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Diego Araújo**
+[LinkedIn](https://linkedin.com/in/diego-araujo115) • [GitHub](https://github.com/diaraujo115)
